@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct CardHunterApp: App {
+    
+    let board = Board()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(board)
         }
     }
 }
