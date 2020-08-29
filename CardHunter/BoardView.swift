@@ -19,6 +19,8 @@ struct BoardView: View {
                 ForEach(board.slots) {
                     slot in
                     SlotView(slot: slot) {
+                        card in
+                    } onCardDropped: {
                         card, localOffset in
                         if
                             let slot = board[slot.id],

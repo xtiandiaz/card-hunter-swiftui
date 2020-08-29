@@ -14,7 +14,9 @@ class Board: ObservableObject {
     lazy var slots: [Slot] = slotDict.compactMap { $0.value }.sorted(by: \.id)
     
     init() {
-        cards = (0..<3).map { Card(id: $0) }
+        cards = [
+            .avatar, .weapon, .foe, .potion, .gem
+        ]
         
         (0..<12).forEach { slotDict[$0] = Slot(id: $0) }
         
