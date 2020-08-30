@@ -10,20 +10,54 @@ import SwiftUI
 class Slot: ObservableObject, Identifiable {
     
     let id: Int
+    let capacity: Int
+    
     var bounds = CGRect.zero
+    var isLocked: Bool = false
     
     @Published var cards = [Card]()
     
-    init(id: Int) {
+    init(id: Int, capacity: UInt) {
         self.id = id
+        self.capacity = Int(capacity)
     }
     
-    func popCard() {
+    var isEmpty: Bool {
+        cards.isEmpty
+    }
+    
+    @discardableResult
+    func popCard() -> Bool {
+        guard !isLocked else {
+            print("\(self) is locked; cards can't be popped from it!")
+            return false
+        }
+        
+        guard !isEmpty else {
+            print("\(self) is empty; no cards can be popped from it!")
+            return false
+        }
+        
         cards.remove(at: 0)
+        
+        return true
     }
     
-    func pushCard(_ card: Card) {
+    @discardableResult
+    func pushCard(_ card: Card) -> Bool {
+        guard !isLocked else {
+            print("\(self) is locked; cards can't be pushed into it!")
+            return false
+        }
+        
+        guard cards.count < capacity else {
+            print("\(self) is full; no more cards can be pushed into it!")
+            return false
+        }
+        
         cards.insert(card, at: 0)
+        
+        return true
     }
     
     // MARK: Private

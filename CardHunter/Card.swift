@@ -7,16 +7,66 @@
 
 import SwiftUI
 
-struct Card: Identifiable, Hashable {
+enum CardType: Int {
     
-    static let avatar = Card(id: 0, value: 10, content: "😎", color: Color.yellow)
-    static let weapon = Card(id: 1, value: 5, content: "⚔️", color: Color.gray)
-    static let foe = Card(id: 2, value: 10, content: "👹", color: Color.red)
-    static let potion = Card(id: 3, value: 3, content: "🧪", color: Color.green)
-    static let gem = Card(id: 4, value: 5, content: "💎", color: Color.blue)
+    case avatar, foe, weapon, food, gem
+    
+    var color: Color {
+        switch self {
+        case .avatar:
+            return Color.yellow
+        case .foe:
+            return Color.red
+        case .weapon:
+            return Color.gray
+        case .gem, .food:
+            return Color.white
+        }
+    }
+    
+    func content(forValue value: Int) -> String {
+        switch self {
+        case .avatar:
+            return "😎"
+        case .foe:
+            return "👹"
+        case .weapon:
+            return "⚔️"
+        case .gem:
+            return "💎"
+        case .food:
+            return "🍖"
+        }
+    }
+}
+
+struct Card: Identifiable, Hashable {
     
     let id: Int
     let value: Int
-    let content: String
-    let color: Color
+    let type: CardType
+    
+    init(type: CardType, value: Int) {
+        id = Self.nextId()
+        
+        self.type = type
+        self.value = value
+    }
+    
+    var content: String {
+        type.content(forValue: value)
+    }
+    
+    static func produce(ofType type: CardType, withValue value: Int) -> Card {
+        Card(type: type, value: value)
+    }
+    
+    // MARK: Private
+    
+    private static var id = 0
+    
+    private static func nextId() -> Int {
+        id += 1
+        return id
+    }
 }

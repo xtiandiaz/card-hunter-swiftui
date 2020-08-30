@@ -9,24 +9,34 @@ import SwiftUI
 
 class Board: ObservableObject {
     
-    @Published var cards: [Card]
+    let rows = 4
+    let cols = 3
     
     lazy var slots: [Slot] = slotDict.compactMap { $0.value }.sorted(by: \.id)
     
     init() {
-        cards = [
-            .avatar, .weapon, .foe, .potion, .gem
-        ]
-        
-        (0..<12).forEach { slotDict[$0] = Slot(id: $0) }
-        
-        cards.forEach {
-            slotDict[$0.id]?.pushCard($0)
+        (0..<12).forEach {
+            slotDict[$0] = Slot(id: $0, capacity: 1)
         }
+        
+        self[1, 2]?.pushCard(Card.produce(ofType: .avatar, withValue: 10))
     }
     
     subscript(slotId: Int) -> Slot? {
         slotDict[slotId]
+    }
+    
+    subscript(col: Int, row: Int) -> Slot? {
+        slots[row * cols + col]
+    }
+    
+    func tryMovingCard(_ card: Card, fromSlot origin: Slot, withPositionOffset offset: CGPoint) {
+        if
+            let destination = slotForPosition(origin.bounds.center + offset),
+            origin.popCard()
+        {
+            destination.pushCard(card)
+        }
     }
     
     func slotForPosition(_ position: CGPoint) -> Slot? {

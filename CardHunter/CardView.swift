@@ -51,7 +51,7 @@ struct CardView: View {
         
         return ZStack {
             RoundedRectangle(cornerRadius: 8.0, style: .continuous)
-                .fill(card.color)
+                .fill(card.type.color)
             
             Text(card.content)
                 .font(.system(size: 56))
@@ -60,7 +60,7 @@ struct CardView: View {
                 Text(String(card.value))
                     .foregroundColor(Color.white)
                     .font(.system(size: 20, weight: .bold))
-                    .shadow(color: Color.black.opacity(0.5), radius: 2)
+                    .shadow(color: Color.black.opacity(0.75), radius: 2)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             .padding(8)
@@ -81,7 +81,7 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(card: Card.avatar, stackIndex: 0) {
+        CardView(card: Card.produce(ofType: .avatar, withValue: 10), stackIndex: 0) {
         } onCardDropped: { _ in
         }
     }
