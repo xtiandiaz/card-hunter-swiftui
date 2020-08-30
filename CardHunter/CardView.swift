@@ -38,13 +38,12 @@ struct CardView: View {
             }
             .onEnded {
                 value in
-                
                 onCardDropped(CGPoint(
                     x: value.translation.width,
                     y: value.translation.height
                 ))
                 
-                withAnimation {
+                withAnimation(.easeOut(duration: 0.1)) {
                     self.draggingOffset = .zero
                     self.isDragging = false
                 }
@@ -56,6 +55,15 @@ struct CardView: View {
             
             Text(card.content)
                 .font(.system(size: 40))
+            
+            ZStack {
+                Text(String(card.value))
+                    .foregroundColor(Color.white)
+                    .font(.system(size: 20, weight: .bold))
+                    .shadow(color: Color.black.opacity(0.4), radius: 2)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+            .padding(8)
         }
         .aspectRatio(1, contentMode: .fit)
         .scaleEffect(isDragging ? 1.1 : 1)
@@ -69,4 +77,12 @@ struct CardView: View {
     @State private var isDragging = false
     
     private let stackOffset: CGSize
+}
+
+struct CardView_Previews: PreviewProvider {
+    static var previews: some View {
+        CardView(card: Card.avatar, stackIndex: 0) {
+        } onCardDropped: { _ in
+        }
+    }
 }
