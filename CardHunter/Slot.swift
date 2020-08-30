@@ -15,7 +15,7 @@ class Slot: ObservableObject, Identifiable {
     var bounds = CGRect.zero
     var isLocked: Bool = false
     
-    @Published var cards = [Card]()
+    var cards = [Card]()
     
     init(id: Int, capacity: UInt) {
         self.id = id
@@ -38,7 +38,10 @@ class Slot: ObservableObject, Identifiable {
             return false
         }
         
+        objectWillChange.send()
+        
         cards.remove(at: 0)
+        sort()
         
         return true
     }
@@ -55,10 +58,19 @@ class Slot: ObservableObject, Identifiable {
             return false
         }
         
+        objectWillChange.send()
+        
         cards.insert(card, at: 0)
+        sort()
         
         return true
     }
     
     // MARK: Private
+    
+    private func sort() {
+        cards.enumerated().forEach {
+            $0.element.stackIndex = $0.offset
+        }
+    }
 }

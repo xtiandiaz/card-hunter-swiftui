@@ -19,7 +19,7 @@ class Board: ObservableObject {
             slotDict[$0] = Slot(id: $0, capacity: 1)
         }
         
-        self[1, 2]?.pushCard(Card.produce(ofType: .avatar, withValue: 10))
+        self[1, 2]?.pushCard(AvatarCard.produce(withValue: 10))
     }
     
     subscript(slotId: Int) -> Slot? {

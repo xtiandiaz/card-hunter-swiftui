@@ -10,22 +10,22 @@ import SwiftUI
 struct CardView: View {
     
     let card: Card
-    let stackIndex: Int
     let onCardPicked: (() -> Void)
     let onCardDropped: ((CGPoint) -> Void)
     
+    @ObservedObject var stats: CardStats
+    
     init(
         card: Card,
-        stackIndex: Int,
         onCardPicked: @escaping (() -> Void),
         onCardDropped: @escaping ((CGPoint) -> Void)
     ) {
         self.card = card
-        self.stackIndex = stackIndex
         self.onCardPicked = onCardPicked
         self.onCardDropped = onCardDropped
         
-        stackOffset = CGSize(width: 0, height: CGFloat(stackIndex) * 4.0)
+        stats = card.stats
+        stackOffset = CGSize(width: 0, height: CGFloat(card.stackIndex) * 4.0)
     }
     
     var body: some View {
@@ -53,11 +53,11 @@ struct CardView: View {
             RoundedRectangle(cornerRadius: 8.0, style: .continuous)
                 .fill(card.type.color)
             
-            Text(card.content)
+            Text(card.type.content)
                 .font(.system(size: 56))
             
             ZStack {
-                Text(String(card.value))
+                Text(String(stats.value))
                     .foregroundColor(Color.white)
                     .font(.system(size: 20, weight: .bold))
                     .shadow(color: Color.black.opacity(0.75), radius: 2)
@@ -68,7 +68,7 @@ struct CardView: View {
         .aspectRatio(1, contentMode: .fit)
         .scaleEffect(isDragging ? 1.05 : 1)
         .offset(draggingOffset + stackOffset)
-        .gesture(dragGesture, including: stackIndex == 0 ? .all : .none)
+        .gesture(dragGesture, including: card.stackIndex == 0 ? .all : .none)
     }
     
     // MARK: Private
@@ -81,7 +81,7 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(card: Card.produce(ofType: .avatar, withValue: 10), stackIndex: 0) {
+        CardView(card: AvatarCard.produce(withValue: 10)) {
         } onCardDropped: { _ in
         }
     }

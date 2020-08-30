@@ -16,9 +16,9 @@ struct SlotView: View {
     
     var body: some View {
         ZStack {
-            ForEach(slot.cards.enumerated().map { $0 }, id: \.element) {
-                index, card in
-                CardView(card: card, stackIndex: index) {
+            ForEach(slot.cards, id: \.id) {
+                card in
+                CardView(card: card) {
                     self.onCardPicked(card)
                     zIndex = 100
                 } onCardDropped: {
@@ -26,7 +26,7 @@ struct SlotView: View {
                     self.onCardDropped(card, localOffset)
                     zIndex = 0
                 }
-                .zIndex(Double(-index))
+                .zIndex(-card.zIndex)
             }
             
             RoundedRectangle(cornerRadius: 8.0, style: .continuous)

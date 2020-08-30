@@ -24,7 +24,7 @@ enum CardType: Int {
         }
     }
     
-    func content(forValue value: Int) -> String {
+    var content: String {
         switch self {
         case .avatar:
             return "😎"
@@ -40,33 +40,27 @@ enum CardType: Int {
     }
 }
 
-struct Card: Identifiable, Hashable {
+protocol Card: AnyObject {
     
-    let id: Int
-    let value: Int
-    let type: CardType
+    var id: UUID { get }
+    var type: CardType { get }
+    var stats: CardStats { get }
     
-    init(type: CardType, value: Int) {
-        id = Self.nextId()
-        
-        self.type = type
+    var stackIndex: Int { get set }
+}
+
+extension Card {
+    
+    var zIndex: Double {
+        Double(-stackIndex)
+    }
+}
+
+class CardStats: ObservableObject {
+    
+    @Published var value: Int
+    
+    init(value: Int) {
         self.value = value
-    }
-    
-    var content: String {
-        type.content(forValue: value)
-    }
-    
-    static func produce(ofType type: CardType, withValue value: Int) -> Card {
-        Card(type: type, value: value)
-    }
-    
-    // MARK: Private
-    
-    private static var id = 0
-    
-    private static func nextId() -> Int {
-        id += 1
-        return id
     }
 }
