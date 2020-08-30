@@ -13,7 +13,7 @@ struct CardView: View {
     let onCardPicked: (() -> Void)
     let onCardDropped: ((CGPoint) -> Void)
     
-    @ObservedObject var stats: CardStats
+    @ObservedObject var metrics: CardMetrics
     
     init(
         card: Card,
@@ -24,7 +24,7 @@ struct CardView: View {
         self.onCardPicked = onCardPicked
         self.onCardDropped = onCardDropped
         
-        stats = card.stats
+        metrics = card.metrics
         stackOffset = CGSize(width: 0, height: CGFloat(card.stackIndex) * 4.0)
     }
     
@@ -51,19 +51,27 @@ struct CardView: View {
         
         return ZStack {
             RoundedRectangle(cornerRadius: 8.0, style: .continuous)
-                .fill(card.type.color)
+                .fill(card.backgroundColor)
             
-            Text(card.type.content)
+            Text(card.content)
                 .font(.system(size: 56))
             
-            ZStack {
-                Text(String(stats.value))
-                    .foregroundColor(Color.white)
-                    .font(.system(size: 20, weight: .bold))
-                    .shadow(color: Color.black.opacity(0.75), radius: 2)
+            if let health = card.metrics[.health] {
+                MetricView(metric: health, color: card.foregroundColor, anchor: .topLeading)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-            .padding(8)
+            
+            if let attack = card.metrics[.attack] {
+                MetricView(metric: attack, color: card.foregroundColor, anchor: .topTrailing)
+            }
+            
+            if let defense = card.metrics[.defense] {
+                MetricView(metric: defense, color: card.foregroundColor, anchor: . bottomLeading)
+            }
+            
+            if let wealth = card.metrics[.wealth] {
+                MetricView(metric: wealth, color: card.foregroundColor, anchor: .bottomTrailing)
+            }
+                    
         }
         .aspectRatio(1, contentMode: .fit)
         .scaleEffect(isDragging ? 1.05 : 1)
@@ -81,8 +89,42 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(card: AvatarCard.produce(withValue: 10)) {
+        CardView(card: AvatarCard(health: 10, attack: 5, defense: 0, wealth: 0)) {
         } onCardDropped: { _ in
         }
+    }
+}
+
+// MARK: - Subviews
+
+private struct MetricView: View {
+    
+    let metric: CardMetric
+    let color: Color
+    let anchor: Alignment
+    
+    var valueView: some View {
+        Text("\(metric.value)")
+            .font(.system(size: 18, weight: .black))
+            .foregroundColor(color)
+    }
+    
+    var iconView: some View {
+        Text(metric.key.icon)
+            .font(.system(size: 12))
+    }
+    
+    var body: some View {
+        VStack(alignment: anchor.horizontal, spacing: 0) {
+            if anchor.vertical == .top {
+                valueView
+                iconView
+            } else {
+                iconView
+                valueView
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: anchor)
+        .padding(4)
     }
 }

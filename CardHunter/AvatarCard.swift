@@ -11,17 +11,29 @@ class AvatarCard: Card {
     
     let id: UUID
     let type: CardType
-    let stats: CardStats
+    let metrics = CardMetrics()
     
     var stackIndex = 0
     
-    init(value: Int) {
+    init(health: Int, attack: Int, defense: Int, wealth: Int) {
         id = UUID()
         type = .avatar
-        stats = CardStats(value: value)
+        
+        metrics.set(value: health, forKey: .health)
+        metrics.set(value: attack, forKey: .attack)
+        metrics.set(value: defense, forKey: .defense)
+        metrics.set(value: wealth, forKey: .wealth)
     }
     
-    static func produce(withValue value: Int) -> AvatarCard {
-        AvatarCard(value: value)
+    var content: String {
+        "😎"
+    }
+    
+    var backgroundColor: Color {
+        Color.yellow
+    }
+    
+    var foregroundColor: Color {
+        Color.black
     }
 }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		85BBBAD724FBBD8D00F0372A /* AvatarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBAD624FBBD8D00F0372A /* AvatarCard.swift */; };
+		85BBBAD924FBF2AA00F0372A /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBAD824FBF2AA00F0372A /* Deck.swift */; };
+		85BBBADD24FBFE5000F0372A /* CardMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBADC24FBFE5000F0372A /* CardMetrics.swift */; };
 		85F795A624E9762D00CC9E9C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F795A524E9762D00CC9E9C /* ContentView.swift */; };
 		85F795A824E9762F00CC9E9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85F795A724E9762F00CC9E9C /* Assets.xcassets */; };
 		85F795AB24E9762F00CC9E9C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85F795AA24E9762F00CC9E9C /* Preview Assets.xcassets */; };
@@ -26,6 +28,8 @@
 
 /* Begin PBXFileReference section */
 		85BBBAD624FBBD8D00F0372A /* AvatarCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCard.swift; sourceTree = "<group>"; };
+		85BBBAD824FBF2AA00F0372A /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
+		85BBBADC24FBFE5000F0372A /* CardMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMetrics.swift; sourceTree = "<group>"; };
 		85F795A024E9762D00CC9E9C /* CardHunter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardHunter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85F795A524E9762D00CC9E9C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		85F795A724E9762F00CC9E9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -119,9 +123,11 @@
 		85F795C224FA35D800CC9E9C /* Cards */ = {
 			isa = PBXGroup;
 			children = (
+				85BBBAD624FBBD8D00F0372A /* AvatarCard.swift */,
 				85F795C324FA35ED00CC9E9C /* Card.swift */,
 				85F795C524FA360100CC9E9C /* CardView.swift */,
-				85BBBAD624FBBD8D00F0372A /* AvatarCard.swift */,
+				85BBBADC24FBFE5000F0372A /* CardMetrics.swift */,
+				85BBBAD824FBF2AA00F0372A /* Deck.swift */,
 			);
 			name = Cards;
 			sourceTree = "<group>";
@@ -205,6 +211,8 @@
 				85F795B924FA2D2100CC9E9C /* Slot.swift in Sources */,
 				85FCC76624FB9743009C60ED /* SceneDelegate.swift in Sources */,
 				85F795BC24FA31C000CC9E9C /* SequenceExtensions.swift in Sources */,
+				85BBBADD24FBFE5000F0372A /* CardMetrics.swift in Sources */,
+				85BBBAD924FBF2AA00F0372A /* Deck.swift in Sources */,
 				85F795C024FA35A000CC9E9C /* SlotView.swift in Sources */,
 				85BBBAD724FBBD8D00F0372A /* AvatarCard.swift in Sources */,
 				85F795C824FA408800CC9E9C /* GeometryExtensions.swift in Sources */,
