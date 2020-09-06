@@ -62,6 +62,6 @@ struct SlotRow: View {
 struct BoardView_Previews: PreviewProvider {
     static var previews: some View {
         BoardView()
-            .environmentObject(Board())
+            .environmentObject(Board(rows: 4, cols: 3))
     }
 }

@@ -57,19 +57,31 @@ struct CardView: View {
                 .font(.system(size: 56))
             
             if let health = card.metrics[.health] {
-                MetricView(metric: health, color: card.foregroundColor, anchor: .topLeading)
+                MetricView(
+                    metric: health,
+                    anchor: .topLeading,
+                    showsIcon: card.type == .avatar)
             }
             
             if let attack = card.metrics[.attack] {
-                MetricView(metric: attack, color: card.foregroundColor, anchor: .topTrailing)
+                MetricView(
+                    metric: attack,
+                    anchor: .topTrailing,
+                    showsIcon: card.type == .avatar)
             }
             
             if let defense = card.metrics[.defense] {
-                MetricView(metric: defense, color: card.foregroundColor, anchor: . bottomLeading)
+                MetricView(
+                    metric: defense,
+                    anchor: . bottomLeading,
+                    showsIcon: card.type == .avatar)
             }
             
             if let wealth = card.metrics[.wealth] {
-                MetricView(metric: wealth, color: card.foregroundColor, anchor: .bottomTrailing)
+                MetricView(
+                    metric: wealth,
+                    anchor: .bottomTrailing,
+                    showsIcon: card.type == .avatar)
             }
                     
         }
@@ -100,13 +112,13 @@ struct CardView_Previews: PreviewProvider {
 private struct MetricView: View {
     
     let metric: CardMetric
-    let color: Color
     let anchor: Alignment
+    let showsIcon: Bool
     
     var valueView: some View {
         Text("\(metric.value)")
             .font(.system(size: 18, weight: .black))
-            .foregroundColor(color)
+            .foregroundColor(metric.key.foregroundColor)
     }
     
     var iconView: some View {

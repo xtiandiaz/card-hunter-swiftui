@@ -9,17 +9,26 @@ import SwiftUI
 
 class Board: ObservableObject {
     
-    let rows = 4
-    let cols = 3
+    let rows: Int
+    let cols: Int
     
     lazy var slots: [Slot] = slotDict.compactMap { $0.value }.sorted(by: \.id)
     
-    init() {
-        (0..<12).forEach {
-            slotDict[$0] = Slot(id: $0, capacity: 1)
+    init(rows: Int, cols: Int) {
+        self.rows = rows
+        self.cols = cols
+        
+        (0..<rows * cols).forEach {
+            slotDict[$0] = Slot(id: $0, capacity: 2)
         }
         
-        self[1, 2]?.pushCard(AvatarCard(health: 10, attack: 3, defense: 0, wealth: 0))
+        self[1, 2]?.pushCard(AvatarCard(health: 10, attack: 10, defense: 0, wealth: 0))
+        
+        slots.forEach {
+            if $0.isEmpty, let card = deck.deal() {
+                $0.pushCard(card)
+            }
+        }
     }
     
     subscript(slotId: Int) -> Slot? {
@@ -31,12 +40,23 @@ class Board: ObservableObject {
     }
     
     func tryMovingCard(_ card: Card, fromSlot origin: Slot, withPositionOffset offset: CGPoint) {
-        if
-            let destination = slotForPosition(origin.bounds.center + offset),
-            origin.popCard()
-        {
-            destination.pushCard(card)
+        guard let destination = slotForPosition(origin.bounds.center + offset) else {
+            return
         }
+        
+        if destination.isEmpty {
+            if destination.pushCard(card) {
+                origin.popCard()
+            }
+        } else if let target = destination.cards.first {
+            target.apply(other: card)
+            
+            if target.isInvalidated, destination.pushCard(card) {
+                origin.popCard()
+            }
+        }
+        
+        cleanUp()
     }
     
     func slotForPosition(_ position: CGPoint) -> Slot? {
@@ -51,7 +71,13 @@ class Board: ObservableObject {
     
     // MARK: Private
     
+    private let deck = Deck()
+    
     private var slotDict = [Int: Slot]()
+    
+    private func cleanUp() {
+        slots.forEach { $0.cleanUp() }
+    }
 }
 
 struct BoundsPreference {

@@ -26,7 +26,7 @@ struct SlotView: View {
                     self.onCardDropped(card, localOffset)
                     zIndex = 0
                 }
-                .zIndex(-card.zIndex)
+                .zIndex(card.zIndex)
             }
             
             RoundedRectangle(cornerRadius: 8.0, style: .continuous)

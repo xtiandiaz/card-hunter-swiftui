@@ -5,7 +5,7 @@
 //  Created by Cristian Díaz on 30.8.2020.
 //
 
-import Combine
+import SwiftUI
 
 struct CardMetric {
     
@@ -25,6 +25,19 @@ struct CardMetric {
                 return "🛡"
             }
         }
+        
+        var foregroundColor: Color {
+            switch self {
+            case .health:
+                return .red
+            case .wealth:
+                return .blue
+            case .attack:
+                return .grayDark
+            case .defense:
+                return .grayDark
+            }
+        }
     }
     
     let key: Key
@@ -38,7 +51,24 @@ class CardMetrics: ObservableObject {
     }
     
     func set(value: Int, forKey key: CardMetric.Key) {
-        metrics[key] = CardMetric(key: key, value: value)
+        objectWillChange.send()
+        metrics[key] = CardMetric(key: key, value: max(value, 0))
+    }
+    
+    func set(icon: String, forKey key: CardMetric.Key) {
+        
+    }
+    
+    func add(value: Int, toKey key: CardMetric.Key) {
+        set(value: safeValue(forKey: key) + value, forKey: key)
+    }
+    
+    func safeValue(forKey key: CardMetric.Key) -> Int {
+        metrics[key]?.value ?? 0
+    }
+    
+    func isNil(_ key: CardMetric.Key) -> Bool {
+        safeValue(forKey: key) <= 0
     }
     
     // MARK: Private

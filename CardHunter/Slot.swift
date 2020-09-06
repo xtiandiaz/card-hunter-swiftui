@@ -66,6 +66,14 @@ class Slot: ObservableObject, Identifiable {
         return true
     }
     
+    func cleanUp() {
+        for (index, card) in cards.enumerated().reversed() {
+            if card.isInvalidated {
+                cards.remove(at: index)
+            }
+        }
+    }
+    
     // MARK: Private
     
     private func sort() {

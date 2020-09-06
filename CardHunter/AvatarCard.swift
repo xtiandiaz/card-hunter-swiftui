@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class AvatarCard: Card {
+class AvatarCard: Card, Destructible {
     
     let id: UUID
     let type: CardType
@@ -25,15 +25,41 @@ class AvatarCard: Card {
         metrics.set(value: wealth, forKey: .wealth)
     }
     
+    deinit {
+        print("You died!")
+    }
+    
     var content: String {
-        "😎"
+        switch health {
+        case 0:
+            return "💀"
+        case 1..<5:
+            return "😨"
+        case 5..<10:
+            return "😬"
+        default:
+            return "😎"
+        }
+    }
+    
+    var isInvalidated: Bool {
+        health <= 0
     }
     
     var backgroundColor: Color {
-        Color.yellow
+        Color.white
     }
     
     var foregroundColor: Color {
         Color.black
+    }
+    
+    func attack(target: Int) -> Int {
+        let attack = metrics.safeValue(forKey: .attack)
+        let power = min(target, attack)
+        
+        metrics.add(value: -target, toKey: .attack)
+        
+        return power
     }
 }
