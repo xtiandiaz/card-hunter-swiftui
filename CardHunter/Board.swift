@@ -11,32 +11,39 @@ class Board: ObservableObject {
     
     let rows: Int
     let cols: Int
+    let inventoryRows: Int
     
-    lazy var slots: [Slot] = slotDict.compactMap { $0.value }.sorted(by: \.id)
+    lazy var fieldSlots: [Slot] = slots(for: .field)
+    lazy var inventorySlots: [Slot] = slots(for: .inventory)
     
-    init(rows: Int, cols: Int) {
+    init(rows: Int, cols: Int, inventoryRows: Int) {
         self.rows = rows
         self.cols = cols
+        self.inventoryRows = inventoryRows
         
-        (0..<rows * cols).forEach {
-            slotDict[$0] = Slot(id: $0, capacity: 2)
+        (0..<rows * cols).forEach { _ in
+            add(slot: Slot(type: .field, capacity: 2))
         }
         
-        self[1, 2]?.pushCard(AvatarCard(health: 10, attack: 10, defense: 0, wealth: 0))
+        (0..<inventoryRows * cols).forEach { _ in
+            add(slot: Slot(type: .inventory, capacity: 1))
+        }
         
-        slots.forEach {
+        self[1, 1]?.pushCard(AvatarCard(health: 10, attack: 10, defense: 0, wealth: 0))
+        
+        fieldSlots.forEach {
             if $0.isEmpty, let card = deck.deal() {
                 $0.pushCard(card)
             }
         }
     }
     
-    subscript(slotId: Int) -> Slot? {
+    subscript(slotId: UUID) -> Slot? {
         slotDict[slotId]
     }
     
     subscript(col: Int, row: Int) -> Slot? {
-        slots[row * cols + col]
+        fieldSlots[row * cols + col]
     }
     
     func tryMovingCard(_ card: Card, fromSlot origin: Slot, withPositionOffset offset: CGPoint) {
@@ -63,7 +70,7 @@ class Board: ObservableObject {
     }
     
     func slotForPosition(_ position: CGPoint) -> Slot? {
-        slots.first {
+        slotDict.values.first {
             let origin = $0.bounds.origin
             let end = $0.bounds.end
             
@@ -76,16 +83,24 @@ class Board: ObservableObject {
     
     private let deck = Deck()
     
-    private var slotDict = [Int: Slot]()
+    private var slotDict = [UUID: Slot]()
     
     private func cleanUp() {
-        slots.forEach { $0.cleanUp() }
+        fieldSlots.forEach { $0.cleanUp() }
+    }
+    
+    private func add(slot: Slot) {
+        slotDict[slot.id] = slot
+    }
+    
+    private func slots(for type: SlotType) -> [Slot] {
+        slotDict.compactMap { $0.value }.filter { $0.type == type }
     }
 }
 
 struct BoundsPreference {
     
-    let id: Int
+    let id: UUID
     let bounds: Anchor<CGRect>
 }
 
@@ -100,7 +115,7 @@ struct SlotBoundsPreferenceKey: PreferenceKey {
 
 extension View {
     
-    func anchorBounds(forSlotId slotId: Int) -> some View {
+    func anchorBounds(forSlotId slotId: UUID) -> some View {
         self.anchorPreference(key: SlotBoundsPreferenceKey.self, value: .bounds) {
             [BoundsPreference(id: slotId, bounds: $0)]
         }

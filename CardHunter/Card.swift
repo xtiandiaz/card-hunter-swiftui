@@ -7,9 +7,15 @@
 
 import SwiftUI
 
-enum CardType: Int {
+struct CardType: OptionSet {
     
-    case avatar, foe, weapon, food, gem
+    let rawValue: Int
+    
+    static let avatar = CardType(rawValue: 1 << 0)
+    static let foe = CardType(rawValue: 1 << 1)
+    static let food = CardType(rawValue: 1 << 2)
+    static let gem = CardType(rawValue: 1 << 3)
+    static let item = CardType(rawValue: 1 << 4)
 }
 
 protocol Card: AnyObject {
@@ -26,9 +32,7 @@ protocol Card: AnyObject {
     var foregroundColor: Color { get }
 }
 
-protocol Draggable {
-    
-}
+protocol Movable { }
 
 protocol Destructible {
     

@@ -31,7 +31,7 @@ class GemCard: Card {
     }
     
     var foregroundColor: Color {
-        Color.blue
+        Color.white
     }
     
     var isInvalidated: Bool {

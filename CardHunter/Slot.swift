@@ -7,9 +7,16 @@
 
 import SwiftUI
 
+enum SlotType {
+    
+    case field
+    case inventory
+}
+
 class Slot: ObservableObject, Identifiable {
     
-    let id: Int
+    let id: UUID
+    let type: SlotType
     let capacity: Int
     
     var bounds = CGRect.zero
@@ -17,9 +24,19 @@ class Slot: ObservableObject, Identifiable {
     
     var cards = [Card]()
     
-    init(id: Int, capacity: UInt) {
-        self.id = id
+    init(type: SlotType, capacity: UInt) {
+        self.id = UUID()
+        self.type = type
         self.capacity = Int(capacity)
+    }
+    
+    var cardMask: CardType {
+        switch type {
+        case .inventory:
+            return .item
+        default:
+            return []
+        }
     }
     
     var isEmpty: Bool {
@@ -48,6 +65,11 @@ class Slot: ObservableObject, Identifiable {
     
     @discardableResult
     func pushCard(_ card: Card) -> Bool {
+        guard cardMask.isEmpty || cardMask.contains(card.type) else {
+            print("\(self) doesn't accept cards of type \(card.type)")
+            return false
+        }
+        
         guard !isLocked else {
             print("\(self) is locked; cards can't be pushed into it!")
             return false

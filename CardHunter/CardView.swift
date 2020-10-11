@@ -107,7 +107,7 @@ struct CardView: View {
     private let stackOffset: CGSize
     
     private var isDraggable: Bool {
-        card is Draggable && card.stackIndex == 0
+        card is Movable && card.stackIndex == 0
     }
 }
 

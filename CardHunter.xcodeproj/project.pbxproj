@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		850178902533290C009ED351 /* ItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501788F2533290C009ED351 /* ItemCard.swift */; };
 		85BBBAD724FBBD8D00F0372A /* AvatarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBAD624FBBD8D00F0372A /* AvatarCard.swift */; };
 		85BBBAD924FBF2AA00F0372A /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBAD824FBF2AA00F0372A /* Deck.swift */; };
 		85BBBADD24FBFE5000F0372A /* CardMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBADC24FBFE5000F0372A /* CardMetrics.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8501788F2533290C009ED351 /* ItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCard.swift; sourceTree = "<group>"; };
 		85BBBAD624FBBD8D00F0372A /* AvatarCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCard.swift; sourceTree = "<group>"; };
 		85BBBAD824FBF2AA00F0372A /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		85BBBADC24FBFE5000F0372A /* CardMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMetrics.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				85F795C524FA360100CC9E9C /* CardView.swift */,
 				85BBBADC24FBFE5000F0372A /* CardMetrics.swift */,
 				85BBBAD824FBF2AA00F0372A /* Deck.swift */,
+				8501788F2533290C009ED351 /* ItemCard.swift */,
 			);
 			name = Cards;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				85BBBAE125058C5F00F0372A /* FoodCard.swift in Sources */,
 				85BBBAD924FBF2AA00F0372A /* Deck.swift in Sources */,
 				85F795C024FA35A000CC9E9C /* SlotView.swift in Sources */,
+				850178902533290C009ED351 /* ItemCard.swift in Sources */,
 				85BBBAD724FBBD8D00F0372A /* AvatarCard.swift in Sources */,
 				85F795C824FA408800CC9E9C /* GeometryExtensions.swift in Sources */,
 			);

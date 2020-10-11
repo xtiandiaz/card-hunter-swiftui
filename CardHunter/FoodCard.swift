@@ -23,7 +23,15 @@ class FoodCard: Card {
     }
     
     var content: String {
-        "🍖"
+        switch value {
+        case 1...2:
+            return ["🍫", "🍪", "🍰"].randomElement()!
+        case 3...4:
+            return ["🍕", "🥗", "🍣"].randomElement()!
+        default:
+            return ["🍖", "🍔", "🍗"].randomElement()!
+        }
+        
     }
     
     var backgroundColor: Color {

@@ -13,12 +13,22 @@ struct BoardView: View {
     
     var body: some View {
         ZStack {
-            ForEach(0..<board.slots.count/board.cols) {
-                row in
-                SlotRow(slots: Array(board.slots[SlotRow.indexRange(rowIndex: row, cols: board.cols)])) {
+            VStack {
+                SlotRow(slots: board.inventorySlots) {
                     card in
                 } onCardDropped: {
                     board.tryMovingCard($0, fromSlot: $1, withPositionOffset: $2)
+                }
+                
+                Spacer().frame(height: 80)
+                
+                ForEach(0..<board.fieldSlots.count/board.cols) {
+                    row in
+                    SlotRow(slots: Array(board.fieldSlots[SlotRow.indexRange(rowIndex: row, cols: board.cols)])) {
+                        card in
+                    } onCardDropped: {
+                        board.tryMovingCard($0, fromSlot: $1, withPositionOffset: $2)
+                    }
                 }
             }
             .resolveLayout(forBoard: board)
@@ -62,6 +72,6 @@ struct SlotRow: View {
 struct BoardView_Previews: PreviewProvider {
     static var previews: some View {
         BoardView()
-            .environmentObject(Board(rows: 4, cols: 3))
+            .environmentObject(Board(rows: 4, cols: 3, inventoryRows: 1))
     }
 }
