@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class AvatarCard: Card, Destructible {
+class AvatarCard: Card, Destructible, Draggable {
     
     let id: UUID
     let type: CardType
@@ -20,8 +20,8 @@ class AvatarCard: Card, Destructible {
         type = .avatar
         
         metrics.set(value: health, forKey: .health)
-        metrics.set(value: attack, forKey: .attack)
-        metrics.set(value: defense, forKey: .defense)
+//        metrics.set(value: attack, forKey: .attack)
+//        metrics.set(value: defense, forKey: .defense)
         metrics.set(value: wealth, forKey: .wealth)
     }
     
@@ -33,9 +33,9 @@ class AvatarCard: Card, Destructible {
         switch health {
         case 0:
             return "💀"
-        case 1..<5:
+        case 1...3:
             return "😨"
-        case 5..<10:
+        case 4...6:
             return "😬"
         default:
             return "😎"

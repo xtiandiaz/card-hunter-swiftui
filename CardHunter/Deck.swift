@@ -13,14 +13,14 @@ class Deck {
         for _ in 0..<13 {
             cards.append(FoeCard(health: Int.random(in: 1...5)))
         }
-        
+
         for _ in 0..<5 {
             cards.append(FoodCard(value: Int.random(in: 1...3)))
         }
         
-        for _ in 0..<5 {
-            cards.append(GemCard(value: Int.random(in: 1...3)))
-        }
+//        for _ in 0..<5 {
+//            cards.append(GemCard(value: Int.random(in: 1...3)))
+//        }
         
         cards.shuffle()
     }

@@ -55,10 +55,6 @@ class CardMetrics: ObservableObject {
         metrics[key] = CardMetric(key: key, value: max(value, 0))
     }
     
-    func set(icon: String, forKey key: CardMetric.Key) {
-        
-    }
-    
     func add(value: Int, toKey key: CardMetric.Key) {
         set(value: safeValue(forKey: key) + value, forKey: key)
     }

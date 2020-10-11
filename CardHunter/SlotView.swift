@@ -9,10 +9,10 @@ import SwiftUI
 
 struct SlotView: View {
     
+    @ObservedObject var slot: Slot
+    
     let onCardPicked: ((Card) -> Void)
     let onCardDropped: ((Card, CGPoint) -> Void)
-    
-    @ObservedObject var slot: Slot
     
     var body: some View {
         ZStack {

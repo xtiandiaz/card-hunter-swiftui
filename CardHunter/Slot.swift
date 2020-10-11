@@ -82,3 +82,10 @@ class Slot: ObservableObject, Identifiable {
         }
     }
 }
+
+extension Slot: Equatable {
+    
+    static func == (lhs: Slot, rhs: Slot) -> Bool {
+        lhs.id == rhs.id
+    }
+}

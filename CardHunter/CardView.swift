@@ -60,35 +60,43 @@ struct CardView: View {
                 MetricView(
                     metric: health,
                     anchor: .topLeading,
-                    showsIcon: card.type == .avatar)
+                    showsIcon: card.type == .avatar,
+                    foregroundColor: card.foregroundColor
+                )
             }
             
             if let attack = card.metrics[.attack] {
                 MetricView(
                     metric: attack,
                     anchor: .topTrailing,
-                    showsIcon: card.type == .avatar)
+                    showsIcon: card.type == .avatar,
+                    foregroundColor: card.foregroundColor
+                )
             }
             
             if let defense = card.metrics[.defense] {
                 MetricView(
                     metric: defense,
                     anchor: . bottomLeading,
-                    showsIcon: card.type == .avatar)
+                    showsIcon: card.type == .avatar,
+                    foregroundColor: card.foregroundColor
+                )
             }
             
             if let wealth = card.metrics[.wealth] {
                 MetricView(
                     metric: wealth,
                     anchor: .bottomTrailing,
-                    showsIcon: card.type == .avatar)
+                    showsIcon: card.type == .avatar,
+                    foregroundColor: card.foregroundColor
+                )
             }
                     
         }
         .aspectRatio(1, contentMode: .fit)
         .scaleEffect(isDragging ? 1.05 : 1)
         .offset(draggingOffset + stackOffset)
-        .gesture(dragGesture, including: card.stackIndex == 0 ? .all : .none)
+        .gesture(dragGesture, including: isDraggable ? .all : .none)
     }
     
     // MARK: Private
@@ -97,6 +105,10 @@ struct CardView: View {
     @State private var isDragging = false
     
     private let stackOffset: CGSize
+    
+    private var isDraggable: Bool {
+        card is Draggable && card.stackIndex == 0
+    }
 }
 
 struct CardView_Previews: PreviewProvider {
@@ -114,11 +126,12 @@ private struct MetricView: View {
     let metric: CardMetric
     let anchor: Alignment
     let showsIcon: Bool
+    let foregroundColor: Color
     
     var valueView: some View {
         Text("\(metric.value)")
             .font(.system(size: 18, weight: .black))
-            .foregroundColor(metric.key.foregroundColor)
+            .foregroundColor(foregroundColor)
     }
     
     var iconView: some View {

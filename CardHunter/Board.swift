@@ -40,7 +40,10 @@ class Board: ObservableObject {
     }
     
     func tryMovingCard(_ card: Card, fromSlot origin: Slot, withPositionOffset offset: CGPoint) {
-        guard let destination = slotForPosition(origin.bounds.center + offset) else {
+        guard
+            let destination = slotForPosition(origin.bounds.center + offset),
+            destination != origin
+        else {
             return
         }
         

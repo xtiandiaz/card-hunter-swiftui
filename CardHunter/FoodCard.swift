@@ -31,7 +31,7 @@ class FoodCard: Card {
     }
     
     var foregroundColor: Color {
-        Color.red
+        Color.white
     }
     
     var isInvalidated: Bool {
