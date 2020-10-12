@@ -96,7 +96,7 @@ struct CardView: View {
         .aspectRatio(1, contentMode: .fit)
         .scaleEffect(isDragging ? 1.05 : 1)
         .offset(draggingOffset + stackOffset)
-        .gesture(dragGesture, including: isDraggable ? .all : .none)
+        .gesture(dragGesture, including: isMovable ? .all : .none)
     }
     
     // MARK: Private
@@ -106,7 +106,7 @@ struct CardView: View {
     
     private let stackOffset: CGSize
     
-    private var isDraggable: Bool {
+    private var isMovable: Bool {
         card is Movable && card.stackIndex == 0
     }
 }

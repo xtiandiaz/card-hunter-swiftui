@@ -14,6 +14,7 @@ class AvatarCard: Card, Destructible, Movable {
     let metrics = CardMetrics()
     
     var stackIndex = 0
+    var locationIndex: Int?
     
     init(health: Int, attack: Int, defense: Int, wealth: Int) {
         id = UUID()

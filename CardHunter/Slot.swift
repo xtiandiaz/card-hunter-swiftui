@@ -16,16 +16,23 @@ enum SlotType {
 class Slot: ObservableObject, Identifiable {
     
     let id: UUID
+    let index: Int
     let type: SlotType
     let capacity: Int
     
     var bounds = CGRect.zero
-    var isLocked: Bool = false
+    
+    var isLocked = false {
+        didSet {
+            objectWillChange.send()
+        }
+    }
     
     var cards = [Card]()
     
-    init(type: SlotType, capacity: UInt) {
+    init(index: Int, type: SlotType, capacity: UInt) {
         self.id = UUID()
+        self.index = index
         self.type = type
         self.capacity = Int(capacity)
     }

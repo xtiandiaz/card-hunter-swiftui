@@ -9,96 +9,189 @@ import SwiftUI
 
 class Board: ObservableObject {
     
+    struct Location {
+        
+        let col: Int
+        let row: Int
+        
+        func oneUp() -> Location {
+            Location(col: col, row: row + 1)
+        }
+        
+        func oneDown() -> Location {
+            Location(col: col, row: row - 1)
+        }
+        
+        func oneRight() -> Location {
+            Location(col: col + 1, row: row)
+        }
+        
+        func oneLeft() -> Location {
+            Location(col: col - 1, row: row)
+        }
+    }
+    
     let rows: Int
     let cols: Int
     let inventoryRows: Int
     
-    lazy var fieldSlots: [Slot] = slots(for: .field)
-    lazy var inventorySlots: [Slot] = slots(for: .inventory)
+    lazy var fieldSlots: [Slot] = slots(forType: .field).sorted(by: \.index)
+    lazy var inventorySlots: [Slot] = slots(forType: .inventory).sorted(by: \.index)
     
     init(rows: Int, cols: Int, inventoryRows: Int) {
         self.rows = rows
         self.cols = cols
         self.inventoryRows = inventoryRows
         
-        (0..<rows * cols).forEach { _ in
-            add(slot: Slot(type: .field, capacity: 2))
+        (0..<rows * cols).forEach {
+            add(slot: Slot(index: $0, type: .field, capacity: 2))
         }
         
-        (0..<inventoryRows * cols).forEach { _ in
-            add(slot: Slot(type: .inventory, capacity: 1))
+        (0..<inventoryRows * cols).forEach {
+            add(slot: Slot(index: $0, type: .inventory, capacity: 1))
         }
         
-        self[1, 1]?.pushCard(AvatarCard(health: 10, attack: 10, defense: 0, wealth: 0))
+        let avatarLocation = Location(col: 1, row: 1)
+        slot(forLocation: avatarLocation)?.pushCard(avatar)
         
         fieldSlots.forEach {
             if $0.isEmpty, let card = deck.deal() {
                 $0.pushCard(card)
             }
         }
-    }
-    
-    subscript(slotId: UUID) -> Slot? {
-        slotDict[slotId]
-    }
-    
-    subscript(col: Int, row: Int) -> Slot? {
-        fieldSlots[row * cols + col]
+        
+        setFogOfWar(atIndex: index(forLocation: avatarLocation)!)
     }
     
     func tryMovingCard(_ card: Card, fromSlot origin: Slot, withPositionOffset offset: CGPoint) {
         guard
-            let destination = slotForPosition(origin.bounds.center + offset),
+            let destination = slot(forPosition: origin.bounds.center + offset),
+            !destination.isLocked,
             destination != origin
         else {
             return
         }
         
+        var didMove = false
+        
         if destination.isEmpty {
             if destination.pushCard(card) {
                 origin.popCard()
+                didMove = true
             }
         } else if let target = destination.cards.first {
             target.apply(other: card)
             
             if target.isInvalidated, destination.pushCard(card) {
                 origin.popCard()
+                didMove = true
             }
         }
         
         cleanUp()
         
-        if card.type == .avatar && origin.isEmpty, let newCard = deck.deal() {
-            origin.pushCard(newCard)
+        if didMove, card.type == .avatar {
+            setFogOfWar(atIndex: destination.index)
+            
+            if origin.isEmpty, let newCard = deck.deal() {
+                origin.pushCard(newCard)
+            }
         }
     }
     
-    func slotForPosition(_ position: CGPoint) -> Slot? {
-        slotDict.values.first {
+    func slot(forId id: UUID) -> Slot? {
+        slotForId[id]
+    }
+    
+    func slot(forIndex index: Int) -> Slot? {
+        guard index >= 0, index < rows * cols else {
+            return nil
+        }
+        return slotForIndex[.field]![index]
+    }
+    
+    func slot(forLocation location: Location) -> Slot? {
+        guard let index = index(forLocation: location) else {
+            return nil
+        }
+        return slot(forIndex: index)
+    }
+    
+    func slot(forPosition position: CGPoint) -> Slot? {
+        slotForId.values.first {
             let origin = $0.bounds.origin
             let end = $0.bounds.end
             
-            return position.x >= origin.x && position.y >= origin.y &&
-                position.x <= end.x && position.y <= end.y
+            return position.x >= origin.x &&
+                position.y >= origin.y &&
+                position.x <= end.x &&
+                position.y <= end.y
         }
     }
     
     // MARK: Private
     
     private let deck = Deck()
+    private let avatar = AvatarCard(health: 10, attack: 10, defense: 0, wealth: 0)
     
-    private var slotDict = [UUID: Slot]()
+    private var slotForId = [UUID: Slot]()
+    private var slotForIndex = [SlotType: [Int: Slot]]()
+    
+    private func setFogOfWar(atIndex index: Int) {
+        avatar.locationIndex = index
+        
+        slots(forType: .field).forEach {
+            $0.isLocked = true
+        }
+        
+        guard let location = self.location(forIndex: index) else {
+            return
+        }
+        
+        slot(forLocation: location)?.isLocked = false
+        slot(forLocation: location.oneUp())?.isLocked = false
+        slot(forLocation: location.oneDown())?.isLocked = false
+        slot(forLocation: location.oneLeft())?.isLocked = false
+        slot(forLocation: location.oneRight())?.isLocked = false
+    }
     
     private func cleanUp() {
         fieldSlots.forEach { $0.cleanUp() }
     }
     
     private func add(slot: Slot) {
-        slotDict[slot.id] = slot
+        slotForId[slot.id] = slot
+        
+        if slotForIndex[slot.type] == nil {
+            slotForIndex[slot.type] = [:]
+        }
+        
+        slotForIndex[slot.type]![slot.index] = slot
     }
     
-    private func slots(for type: SlotType) -> [Slot] {
-        slotDict.compactMap { $0.value }.filter { $0.type == type }
+    private func slots(forType type: SlotType) -> [Slot] {
+        slotForIndex[type]?.values.compactMap { $0 } ?? []
+    }
+    
+    private func index(forLocation location: Location) -> Int? {
+        guard isValid(location: location) else {
+            return nil
+        }
+        return location.row * cols + location.col
+    }
+    
+    private func location(forIndex index: Int) -> Location? {
+        let col = index % cols
+        let row = index / cols
+        
+        guard col < cols, row < rows else {
+            return nil
+        }
+        return Location(col: col, row: row)
+    }
+    
+    private func isValid(location: Location) -> Bool {
+        location.col >= 0 && location.col < cols && location.row >= 0 && location.row < rows
     }
 }
 
@@ -132,7 +225,7 @@ extension View {
                 proxy -> Color in
                 DispatchQueue.main.async {
                     prefs.compactMap { $0 }.forEach {
-                        board[$0.id]?.bounds = proxy[$0.bounds]
+                        board.slot(forId: $0.id)?.bounds = proxy[$0.bounds]
                     }
                 }
                 return Color.clear
