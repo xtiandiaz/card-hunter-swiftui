@@ -25,19 +25,6 @@ struct CardMetric {
                 return "🛡"
             }
         }
-        
-        var foregroundColor: Color {
-            switch self {
-            case .health:
-                return .red
-            case .wealth:
-                return .blue
-            case .attack:
-                return .grayDark
-            case .defense:
-                return .grayDark
-            }
-        }
     }
     
     let key: Key

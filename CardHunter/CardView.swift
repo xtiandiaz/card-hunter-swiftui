@@ -54,7 +54,7 @@ struct CardView: View {
                 .fill(card.backgroundColor)
             
             Text(card.content)
-                .font(.system(size: 56))
+                .font(.system(size: 48))
             
             if let health = card.metrics[.health] {
                 MetricView(
@@ -77,7 +77,7 @@ struct CardView: View {
             if let defense = card.metrics[.defense] {
                 MetricView(
                     metric: defense,
-                    anchor: . bottomLeading,
+                    anchor: .bottomLeading,
                     showsIcon: card.type == .avatar,
                     foregroundColor: card.foregroundColor
                 )
@@ -130,13 +130,13 @@ private struct MetricView: View {
     
     var valueView: some View {
         Text("\(metric.value)")
-            .font(.system(size: 18, weight: .black))
+            .font(.system(size: 16, weight: .black))
             .foregroundColor(foregroundColor)
     }
     
     var iconView: some View {
         Text(metric.key.icon)
-            .font(.system(size: 12))
+            .font(.system(size: 8))
     }
     
     var body: some View {
