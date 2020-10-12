@@ -39,6 +39,6 @@ class FoeCard: Card, Destructible {
     }
     
     var foregroundColor: Color {
-        Color.white
+        Color.black
     }
 }

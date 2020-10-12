@@ -67,6 +67,10 @@ class Board: ObservableObject {
         }
         
         cleanUp()
+        
+        if card.type == .avatar && origin.isEmpty, let newCard = deck.deal() {
+            origin.pushCard(newCard)
+        }
     }
     
     func slotForPosition(_ position: CGPoint) -> Slot? {

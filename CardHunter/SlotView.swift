@@ -27,6 +27,13 @@ struct SlotView: View {
                     zIndex = 0
                 }
                 .zIndex(card.zIndex)
+                .transition(card is Movable
+                    ? .identity
+                    : .asymmetric(
+                        insertion: AnyTransition.opacity.combined(with: .scale)
+                            .animation(.easeInOut(duration: 0.5)),
+                        removal: .identity
+                ))
             }
             
             RoundedRectangle(cornerRadius: 8.0, style: .continuous)
@@ -41,3 +48,18 @@ struct SlotView: View {
     
     @State private var zIndex = Double(0)
 }
+
+//extension AnyTransition {
+//
+//    static var cardDeal: AnyTransition {
+//        get {
+//            AnyTransition.modifier(active: CardDealTranstion(), identity: .identity)
+//        }
+//    }
+//}
+//
+//struct CardDealTranstion: ViewModifier {
+//    func body(content: Content) -> some View {
+//        content.scaleEffect(1)
+//    }
+//}
