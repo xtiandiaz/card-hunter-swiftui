@@ -44,15 +44,15 @@ class FoodCard: Card {
     var isInvalidated: Bool {
         value <= 0
     }
-    
-    func eat() {
-        metrics.set(value: 0, forKey: .health)
-    }
 }
 
 extension FoodCard: Edible {
     
     var value: Int {
         metrics.safeValue(forKey: .health)
+    }
+    
+    func eat() {
+        metrics.set(value: 0, forKey: .health)
     }
 }

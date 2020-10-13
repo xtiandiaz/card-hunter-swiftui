@@ -19,7 +19,7 @@ class FoeCard: Card, Destructible {
         id = UUID()
         type = .foe
         
-        metrics.set(value: health, forKey: .health)
+        metrics.set(value: health, forKey: .health, icon: "💀")
     }
     
     deinit {

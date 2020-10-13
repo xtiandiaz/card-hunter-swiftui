@@ -37,16 +37,16 @@ class GemCard: Card {
     var isInvalidated: Bool {
         value <= 0
     }
-    
-    func cash() {
-        metrics.set(value: 0, forKey: .wealth)
-    }
 }
 
 extension GemCard: Cashable {
     
     var value: Int {
         metrics.safeValue(forKey: .wealth)
+    }
+    
+    func cash() {
+        metrics.set(value: 0, forKey: .wealth)
     }
 }
 

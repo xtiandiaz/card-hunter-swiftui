@@ -16,7 +16,7 @@ struct SlotView: View {
     
     var body: some View {
         ZStack {
-            Cap(fill: Color.white.opacity(0.07))
+            Cap(fill: Color.white.opacity(0.1), cornerRadius: 8.0)
             
             ForEach(slot.cards, id: \.id) {
                 card in
@@ -29,7 +29,7 @@ struct SlotView: View {
                     zIndex = 0
                 }
                 .zIndex(card.zIndex)
-                .transition(card is Movable
+                .transition(card.type == .avatar
                     ? .identity
                     : .asymmetric(
                         insertion: AnyTransition.opacity.combined(with: .scale)
@@ -39,8 +39,8 @@ struct SlotView: View {
             }
             
             if slot.isLocked {
-                Cap(fill: Color.black.opacity(1))
-                    .transition(AnyTransition.opacity.animation(.linear(duration: 0.5)))
+                Cap(fill: Color.black.opacity(1), cornerRadius: 0)
+                    .transition(AnyTransition.opacity.animation(.linear(duration: 0.25)))
                     .zIndex(1000)
             }
         }
@@ -54,9 +54,10 @@ struct SlotView: View {
     private struct Cap: View {
         
         let fill: Color
+        let cornerRadius: CGFloat
         
         var body: some View {
-            RoundedRectangle(cornerRadius: 8.0, style: .continuous)
+            RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                 .fill(fill)
                 .aspectRatio(1, contentMode: .fit)
         }

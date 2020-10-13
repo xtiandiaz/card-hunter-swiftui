@@ -51,16 +51,11 @@ class Board: ObservableObject {
             add(slot: Slot(index: $0, type: .inventory, capacity: 1))
         }
         
-        let avatarLocation = Location(col: 1, row: 1)
-        slot(forLocation: avatarLocation)?.pushCard(avatar)
+        startSlot.pushCard(avatar)
         
-        fieldSlots.forEach {
-            if $0.isEmpty, let card = deck.deal() {
-                $0.pushCard(card)
-            }
-        }
+        deal()
         
-        setFogOfWar(atIndex: index(forLocation: avatarLocation)!)
+        setFogOfWar(atIndex: startSlot.index)
     }
     
     func tryMovingCard(_ card: Card, fromSlot origin: Slot, withPositionOffset offset: CGPoint) {
@@ -80,11 +75,23 @@ class Board: ObservableObject {
                 didMove = true
             }
         } else if let target = destination.cards.first {
-            target.apply(other: card)
-            
-            if target.isInvalidated, destination.pushCard(card) {
-                origin.popCard()
-                didMove = true
+            if target.type == .item,
+               let invSlot = firstFreeInventorySlot,
+               invSlot.pushCard(target)
+            {
+                destination.popCard()
+                
+                if destination.pushCard(card) {
+                    origin.popCard()
+                    didMove = true
+                }
+            } else {
+                target.apply(other: card)
+                
+                if target.isInvalidated, destination.pushCard(card) {
+                    origin.popCard()
+                    didMove = true
+                }
             }
         }
         
@@ -93,9 +100,10 @@ class Board: ObservableObject {
         if didMove, card.type == .avatar {
             setFogOfWar(atIndex: destination.index)
             
-            if origin.isEmpty, let newCard = deck.deal() {
-                origin.pushCard(newCard)
-            }
+            setTrail(toDestination: destination)
+//            if origin.isEmpty, let newCard = deck.deal() {
+//                origin.pushCard(newCard)
+//            }
         }
     }
     
@@ -136,6 +144,23 @@ class Board: ObservableObject {
     
     private var slotForId = [UUID: Slot]()
     private var slotForIndex = [SlotType: [Int: Slot]]()
+    private lazy var trail: [Slot] = [startSlot]
+    
+    private var startSlot: Slot {
+        slot(forLocation: Location(col: 2, row: 3))!
+    }
+    
+    private var firstFreeInventorySlot: Slot? {
+        inventorySlots.first { $0.isEmpty }
+    }
+    
+    private func deal() {
+        fieldSlots.forEach {
+            if $0.isEmpty, let card = deck.deal() {
+                $0.pushCard(card)
+            }
+        }
+    }
     
     private func setFogOfWar(atIndex index: Int) {
         avatar.locationIndex = index
@@ -153,6 +178,25 @@ class Board: ObservableObject {
         slot(forLocation: location.oneDown())?.isLocked = false
         slot(forLocation: location.oneLeft())?.isLocked = false
         slot(forLocation: location.oneRight())?.isLocked = false
+    }
+    
+    private func setTrail(toDestination destination: Slot) {
+        if trail.contains(destination) {
+            trail = [destination]
+        } else {
+            trail.append(destination)
+        }
+        
+        print(trail.map { $0.index})
+        
+        if
+            trail.count > 2,
+            let origin = trail.first, origin.isEmpty,
+            let card = deck.deal()
+        {
+            origin.pushCard(card)
+            trail = [destination]
+        }
     }
     
     private func cleanUp() {

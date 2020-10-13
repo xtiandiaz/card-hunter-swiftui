@@ -67,6 +67,13 @@ protocol Cashable {
     func cash()
 }
 
+protocol Usable {
+    
+    var value: Int { get }
+    
+    func use()
+}
+
 extension Card {
     
     var zIndex: Double {

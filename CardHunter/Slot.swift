@@ -52,10 +52,10 @@ class Slot: ObservableObject, Identifiable {
     
     @discardableResult
     func popCard() -> Bool {
-        guard !isLocked else {
-            print("\(self) is locked; cards can't be popped from it!")
-            return false
-        }
+//        guard !isLocked else {
+//            print("\(self) is locked; cards can't be popped from it!")
+//            return false
+//        }
         
         guard !isEmpty else {
             print("\(self) is empty; no cards can be popped from it!")
@@ -77,10 +77,10 @@ class Slot: ObservableObject, Identifiable {
             return false
         }
         
-        guard !isLocked else {
-            print("\(self) is locked; cards can't be pushed into it!")
-            return false
-        }
+//        guard !isLocked else {
+//            print("\(self) is locked; cards can't be pushed into it!")
+//            return false
+//        }
         
         guard cards.count < capacity else {
             print("\(self) is full; no more cards can be pushed into it!")

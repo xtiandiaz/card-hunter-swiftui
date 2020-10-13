@@ -10,21 +10,20 @@ import Foundation
 class Deck {
     
     init() {
-        for _ in 0..<13 {
+        for _ in 0..<20 {
             cards.append(FoeCard(health: Int.random(in: 1...5)))
         }
 
+        for _ in 0..<10 {
+            cards.append(FoodCard(value: Int.random(in: 1...5)))
+        }
+        
         for _ in 0..<5 {
-            cards.append(FoodCard(value: Int.random(in: 1...3)))
+            cards.append(GemCard(value: Int.random(in: 1...3) * 5))
         }
         
-        for _ in 0..<3 {
-            cards.append(GemCard(value: Int.random(in: 1...3)))
-        }
-        
-        for _ in 0..<3 {
-            cards.append(ItemCard(item: .potion))
-        }
+        cards.append(contentsOf: Array(repeating: ItemCard(item: .potion), count: 2))
+        cards.append(ItemCard(item: .torch))
         
         cards.shuffle()
     }
