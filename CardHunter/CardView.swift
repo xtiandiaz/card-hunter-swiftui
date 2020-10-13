@@ -130,13 +130,14 @@ private struct MetricView: View {
     
     var valueView: some View {
         Text("\(metric.value)")
-            .font(.system(size: 16, weight: .black))
+            .font(.system(size: 15, weight: .black))
             .foregroundColor(foregroundColor)
+            .frame(minWidth: 12)
     }
     
     var iconView: some View {
-        Text(metric.key.icon)
-            .font(.system(size: 8))
+        Text(metric.icon)
+            .font(.system(size: 10))
     }
     
     var body: some View {
