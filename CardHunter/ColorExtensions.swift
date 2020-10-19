@@ -12,4 +12,8 @@ extension Color {
     static var grayDark: Color {
         Color("grayDark")
     }
+    
+    static var food: Color {
+        Color("food")
+    }
 }

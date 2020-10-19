@@ -28,6 +28,10 @@ class Deck {
         cards.shuffle()
     }
     
+    var isEmpty: Bool {
+        cards.isEmpty
+    }
+    
     func deal() -> Card? {
         guard !cards.isEmpty else {
             return nil

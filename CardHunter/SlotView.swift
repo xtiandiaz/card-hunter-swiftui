@@ -59,7 +59,7 @@ struct SlotView: View {
         var body: some View {
             RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                 .fill(fill)
-                .aspectRatio(1, contentMode: .fit)
+                .aspectRatio(Slot.aspectRatio, contentMode: .fit)
         }
     }
 }

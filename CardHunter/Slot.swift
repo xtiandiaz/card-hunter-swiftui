@@ -37,6 +37,10 @@ class Slot: ObservableObject, Identifiable {
         self.capacity = Int(capacity)
     }
     
+    static var aspectRatio: CGFloat {
+        1
+    }
+    
     var cardMask: CardType {
         switch type {
         case .inventory:
@@ -101,6 +105,10 @@ class Slot: ObservableObject, Identifiable {
                 cards.remove(at: index)
             }
         }
+    }
+    
+    func clear() {
+        cards.removeAll()
     }
     
     // MARK: Private

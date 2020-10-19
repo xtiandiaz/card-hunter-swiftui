@@ -101,9 +101,6 @@ class Board: ObservableObject {
             setFogOfWar(atIndex: destination.index)
             
             setTrail(toDestination: destination)
-//            if origin.isEmpty, let newCard = deck.deal() {
-//                origin.pushCard(newCard)
-//            }
         }
     }
     
@@ -181,6 +178,10 @@ class Board: ObservableObject {
     }
     
     private func setTrail(toDestination destination: Slot) {
+        guard !deck.isEmpty else {
+            return
+        }
+        
         if trail.contains(destination) {
             trail.reverse()
         } else {
@@ -201,6 +202,10 @@ class Board: ObservableObject {
     
     private func cleanUp() {
         fieldSlots.forEach { $0.cleanUp() }
+    }
+    
+    private func clear() {
+        fieldSlots.forEach { $0.clear() }
     }
     
     private func add(slot: Slot) {

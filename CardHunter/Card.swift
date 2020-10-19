@@ -85,14 +85,12 @@ extension Card {
         case let avatar as AvatarCard:
             switch self {
             case let destructible as Destructible:
-//                let power = avatar.attack(target: destructible.health)
-//                if power > 0 {
-//                    destructible.damage(withValue: power)
-//                } else {
-                    let destructibleHealth = destructible.health
+                destructible.damage(withValue: avatar.attack(target: destructible.health))
+                let destructibleHealth = destructible.health
+                if destructibleHealth > 0 {
                     destructible.damage(withValue: avatar.health)
                     avatar.damage(withValue: destructibleHealth)
-//                }
+                }
             case let edible as Edible:
                 avatar.metrics.add(value: edible.value, toKey: .health)
                 edible.eat()

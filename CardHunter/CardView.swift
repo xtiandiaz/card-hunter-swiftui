@@ -54,12 +54,12 @@ struct CardView: View {
                 .fill(card.backgroundColor)
             
             Text(card.content)
-                .font(.system(size: 48))
+                .font(.system(size: 36))
             
             if let health = card.metrics[.health] {
                 MetricView(
                     metric: health,
-                    anchor: .topLeading,
+                    anchor: .top,
                     showsIcon: card.type == .avatar,
                     foregroundColor: card.foregroundColor
                 )
@@ -68,32 +68,31 @@ struct CardView: View {
             if let attack = card.metrics[.attack] {
                 MetricView(
                     metric: attack,
-                    anchor: .topTrailing,
+                    anchor: .bottom,
                     showsIcon: card.type == .avatar,
                     foregroundColor: card.foregroundColor
                 )
             }
             
-            if let defense = card.metrics[.defense] {
-                MetricView(
-                    metric: defense,
-                    anchor: .bottomLeading,
-                    showsIcon: card.type == .avatar,
-                    foregroundColor: card.foregroundColor
-                )
-            }
-            
-            if let wealth = card.metrics[.wealth] {
-                MetricView(
-                    metric: wealth,
-                    anchor: .bottomTrailing,
-                    showsIcon: card.type == .avatar,
-                    foregroundColor: card.foregroundColor
-                )
-            }
-                    
+//            if let defense = card.metrics[.defense] {
+//                MetricView(
+//                    metric: defense,
+//                    anchor: .bottomLeading,
+//                    showsIcon: card.type == .avatar,
+//                    foregroundColor: card.foregroundColor
+//                )
+//            }
+//
+//            if let wealth = card.metrics[.wealth] {
+//                MetricView(
+//                    metric: wealth,
+//                    anchor: .bottomTrailing,
+//                    showsIcon: card.type == .avatar,
+//                    foregroundColor: card.foregroundColor
+//                )
+//            }
         }
-        .aspectRatio(1, contentMode: .fit)
+        .aspectRatio(Slot.aspectRatio, contentMode: .fit)
         .scaleEffect(isDragging ? 1.05 : 1)
         .offset(draggingOffset + stackOffset)
         .gesture(dragGesture, including: isMovable ? .all : .none)
@@ -124,13 +123,13 @@ struct CardView_Previews: PreviewProvider {
 private struct MetricView: View {
     
     let metric: CardMetric
-    let anchor: Alignment
+    let anchor: VerticalAlignment
     let showsIcon: Bool
     let foregroundColor: Color
     
     var valueView: some View {
         Text("\(metric.value)")
-            .font(.system(size: 15, weight: .black))
+            .font(.system(size: 12, weight: .black))
             .foregroundColor(foregroundColor)
             .frame(minWidth: 12)
     }
@@ -141,16 +140,20 @@ private struct MetricView: View {
     }
     
     var body: some View {
-        VStack(alignment: anchor.horizontal, spacing: 0) {
-            if anchor.vertical == .top {
-                valueView
+        VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 0) {
+            if anchor == .bottom {
+                Spacer()
+            }
+            HStack(alignment: .top, spacing: 0) {
                 iconView
-            } else {
-                iconView
+                Spacer()
                 valueView
             }
+            if anchor == .top {
+                Spacer()
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: anchor)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(4)
     }
 }
