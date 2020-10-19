@@ -21,7 +21,7 @@ class AvatarCard: Card, Destructible, Movable {
         type = .avatar
         
         metrics.set(value: health, forKey: .health)
-        metrics.set(value: attack, forKey: .attack)
+//        metrics.set(value: attack, forKey: .attack)
 //        metrics.set(value: defense, forKey: .defense)
 //        metrics.set(value: wealth, forKey: .wealth)
     }
@@ -48,7 +48,7 @@ class AvatarCard: Card, Destructible, Movable {
     }
     
     var backgroundColor: Color {
-        Color.white
+        Color.yellow
     }
     
     var foregroundColor: Color {

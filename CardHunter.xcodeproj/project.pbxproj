@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6E24F84BF374C4C7E116A75B /* Pods_CardHunter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0046CE724A45D1F18E10D0 /* Pods_CardHunter.framework */; };
 		850178902533290C009ED351 /* ItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501788F2533290C009ED351 /* ItemCard.swift */; };
+		8524AA0C253D858E00F78F7C /* WeaponCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8524AA0B253D858E00F78F7C /* WeaponCard.swift */; };
 		85BBBAD724FBBD8D00F0372A /* AvatarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBAD624FBBD8D00F0372A /* AvatarCard.swift */; };
 		85BBBAD924FBF2AA00F0372A /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBAD824FBF2AA00F0372A /* Deck.swift */; };
 		85BBBADD24FBFE5000F0372A /* CardMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBADC24FBFE5000F0372A /* CardMetrics.swift */; };
@@ -36,6 +37,7 @@
 		0842F0E0576DE9F22A4436EC /* Pods-CardHunter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardHunter.debug.xcconfig"; path = "Target Support Files/Pods-CardHunter/Pods-CardHunter.debug.xcconfig"; sourceTree = "<group>"; };
 		20C25EA4AEB4F60B3BD4D39F /* Pods-CardHunter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardHunter.release.xcconfig"; path = "Target Support Files/Pods-CardHunter/Pods-CardHunter.release.xcconfig"; sourceTree = "<group>"; };
 		8501788F2533290C009ED351 /* ItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCard.swift; sourceTree = "<group>"; };
+		8524AA0B253D858E00F78F7C /* WeaponCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponCard.swift; sourceTree = "<group>"; };
 		85BBBAD624FBBD8D00F0372A /* AvatarCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCard.swift; sourceTree = "<group>"; };
 		85BBBAD824FBF2AA00F0372A /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		85BBBADC24FBFE5000F0372A /* CardMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMetrics.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				85BBBADC24FBFE5000F0372A /* CardMetrics.swift */,
 				85BBBAD824FBF2AA00F0372A /* Deck.swift */,
 				8501788F2533290C009ED351 /* ItemCard.swift */,
+				8524AA0B253D858E00F78F7C /* WeaponCard.swift */,
 			);
 			name = Cards;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				85F795A624E9762D00CC9E9C /* ContentView.swift in Sources */,
 				85BBBAE5250593C500F0372A /* ColorExtensions.swift in Sources */,
 				85F795C624FA360100CC9E9C /* CardView.swift in Sources */,
+				8524AA0C253D858E00F78F7C /* WeaponCard.swift in Sources */,
 				85F795B724FA2C8A00CC9E9C /* Board.swift in Sources */,
 				85F795B924FA2D2100CC9E9C /* Slot.swift in Sources */,
 				85FCC76624FB9743009C60ED /* SceneDelegate.swift in Sources */,

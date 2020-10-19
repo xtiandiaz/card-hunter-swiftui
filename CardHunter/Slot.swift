@@ -9,6 +9,7 @@ import SwiftUI
 
 enum SlotType {
     
+    case spacer
     case field
     case inventory
 }
@@ -41,17 +42,21 @@ class Slot: ObservableObject, Identifiable {
         1
     }
     
-    var cardMask: CardType {
-        switch type {
-        case .inventory:
-            return .item
-        default:
-            return []
-        }
+    var isEnabled: Bool {
+        type != .spacer
     }
     
     var isEmpty: Bool {
         cards.isEmpty
+    }
+    
+    var cardMask: CardType {
+        switch type {
+        case .inventory:
+            return [.item, .weapon]
+        default:
+            return []
+        }
     }
     
     @discardableResult
@@ -124,5 +129,12 @@ extension Slot: Equatable {
     
     static func == (lhs: Slot, rhs: Slot) -> Bool {
         lhs.id == rhs.id
+    }
+}
+
+extension Slot {
+    
+    static var spacer: Slot {
+        Slot(index: 0, type: .spacer, capacity: 0)
     }
 }

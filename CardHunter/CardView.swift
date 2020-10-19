@@ -52,6 +52,7 @@ struct CardView: View {
         return ZStack {
             RoundedRectangle(cornerRadius: 8.0, style: .continuous)
                 .fill(card.backgroundColor)
+                .shadow(radius: 4)
             
             Text(card.content)
                 .font(.system(size: 36))
@@ -60,7 +61,6 @@ struct CardView: View {
                 MetricView(
                     metric: health,
                     anchor: .top,
-                    showsIcon: card.type == .avatar,
                     foregroundColor: card.foregroundColor
                 )
             }
@@ -68,8 +68,7 @@ struct CardView: View {
             if let attack = card.metrics[.attack] {
                 MetricView(
                     metric: attack,
-                    anchor: .bottom,
-                    showsIcon: card.type == .avatar,
+                    anchor: .top,
                     foregroundColor: card.foregroundColor
                 )
             }
@@ -124,19 +123,18 @@ private struct MetricView: View {
     
     let metric: CardMetric
     let anchor: VerticalAlignment
-    let showsIcon: Bool
     let foregroundColor: Color
     
     var valueView: some View {
         Text("\(metric.value)")
-            .font(.system(size: 12, weight: .black))
+            .font(.system(size: 15, weight: .black))
             .foregroundColor(foregroundColor)
-            .frame(minWidth: 12)
+            .frame(minWidth: 12, maxHeight: 15)
     }
     
     var iconView: some View {
         Text(metric.icon)
-            .font(.system(size: 10))
+            .font(.system(size: 12))
     }
     
     var body: some View {

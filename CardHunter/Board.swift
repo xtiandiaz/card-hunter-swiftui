@@ -9,46 +9,25 @@ import SwiftUI
 
 class Board: ObservableObject {
     
-    struct Location {
-        
-        let col: Int
-        let row: Int
-        
-        func oneUp() -> Location {
-            Location(col: col, row: row + 1)
-        }
-        
-        func oneDown() -> Location {
-            Location(col: col, row: row - 1)
-        }
-        
-        func oneRight() -> Location {
-            Location(col: col + 1, row: row)
-        }
-        
-        func oneLeft() -> Location {
-            Location(col: col - 1, row: row)
-        }
-    }
-    
     let rows: Int
     let cols: Int
-    let inventoryRows: Int
+    let collectibleRows: Int
     
-    lazy var fieldSlots: [Slot] = slots(forType: .field).sorted(by: \.index)
-    lazy var inventorySlots: [Slot] = slots(forType: .inventory).sorted(by: \.index)
+    lazy var fieldSlots = slots(forType: .field).sorted(by: \.index)
+    lazy var weaponsSlot = addSlot(withType: .inventory, index: 0, capacity: 10)
+    lazy var collectibleSlots = slots(forType: .inventory).sorted(by: \.index)
     
     init(rows: Int, cols: Int, inventoryRows: Int) {
         self.rows = rows
         self.cols = cols
-        self.inventoryRows = inventoryRows
+        self.collectibleRows = inventoryRows
         
         (0..<rows * cols).forEach {
-            add(slot: Slot(index: $0, type: .field, capacity: 2))
+            addSlot(withType: .field, index: $0, capacity: 2)
         }
         
         (0..<inventoryRows * cols).forEach {
-            add(slot: Slot(index: $0, type: .inventory, capacity: 1))
+            addSlot(withType: .inventory, index: $0, capacity: 2)
         }
         
         startSlot.pushCard(avatar)
@@ -61,7 +40,7 @@ class Board: ObservableObject {
     func tryMovingCard(_ card: Card, fromSlot origin: Slot, withPositionOffset offset: CGPoint) {
         guard
             let destination = slot(forPosition: origin.bounds.center + offset),
-            !destination.isLocked,
+            destination.isEnabled, !destination.isLocked,
             destination != origin
         else {
             return
@@ -75,9 +54,19 @@ class Board: ObservableObject {
                 didMove = true
             }
         } else if let target = destination.cards.first {
-            if target.type == .item,
-               let invSlot = firstFreeInventorySlot,
-               invSlot.pushCard(target)
+            if target.type == .weapon,
+               weaponsSlot.pushCard(target)
+            {
+                destination.popCard()
+                
+                if destination.pushCard(card) {
+                    origin.popCard()
+                    didMove = true
+                }
+            } else if
+                target.type == .item,
+                let invSlot = firstFreeInventorySlot,
+                invSlot.pushCard(target)
             {
                 destination.popCard()
                 
@@ -144,11 +133,11 @@ class Board: ObservableObject {
     private lazy var trail: [Slot] = [startSlot]
     
     private var startSlot: Slot {
-        slot(forLocation: Location(col: 2, row: 3))!
+        slot(forLocation: Location(col: 2, row: 2))!
     }
     
     private var firstFreeInventorySlot: Slot? {
-        inventorySlots.first { $0.isEmpty }
+        collectibleSlots.first { $0.isEmpty }
     }
     
     private func deal() {
@@ -208,7 +197,13 @@ class Board: ObservableObject {
         fieldSlots.forEach { $0.clear() }
     }
     
-    private func add(slot: Slot) {
+    @discardableResult
+    private func addSlot(withType type: SlotType, index: Int, capacity: UInt) -> Slot {
+        add(slot: Slot(index: index, type: type, capacity: capacity))
+    }
+    
+    @discardableResult
+    private func add(slot: Slot) -> Slot {
         slotForId[slot.id] = slot
         
         if slotForIndex[slot.type] == nil {
@@ -216,10 +211,39 @@ class Board: ObservableObject {
         }
         
         slotForIndex[slot.type]![slot.index] = slot
+        
+        return slot
     }
     
     private func slots(forType type: SlotType) -> [Slot] {
         slotForIndex[type]?.values.compactMap { $0 } ?? []
+    }
+}
+
+// MARK: - Location
+
+extension Board {
+    
+    struct Location {
+        
+        let col: Int
+        let row: Int
+        
+        func oneUp() -> Location {
+            Location(col: col, row: row + 1)
+        }
+        
+        func oneDown() -> Location {
+            Location(col: col, row: row - 1)
+        }
+        
+        func oneRight() -> Location {
+            Location(col: col + 1, row: row)
+        }
+        
+        func oneLeft() -> Location {
+            Location(col: col - 1, row: row)
+        }
     }
     
     private func index(forLocation location: Location) -> Int? {

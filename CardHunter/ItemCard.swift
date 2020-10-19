@@ -38,7 +38,7 @@ class ItemCard: Card {
     }
     
     var isInvalidated: Bool {
-        value <= 0
+        consumableValue <= 0
     }
     
     var backgroundColor: Color {
@@ -50,13 +50,9 @@ class ItemCard: Card {
     }
 }
 
-extension ItemCard: Usable {
+extension ItemCard: Consumable {
     
-    var value: Int {
-        metrics.safeValue(forKey: .power)
-    }
-    
-    func use() {
-        metrics.set(value: 0, forKey: .power)
+    var consumableKey: CardMetric.Key {
+        .power
     }
 }

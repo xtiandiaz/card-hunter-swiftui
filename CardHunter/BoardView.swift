@@ -6,52 +6,64 @@
 //
 
 import SwiftUI
+import Emerald
 
 struct BoardView: View {
     
-    @EnvironmentObject var board: Board
-    
     var body: some View {
         ZStack {
-            VStack {
-                SlotRow(slots: board.inventorySlots) {
-                    card in
-                } onCardDropped: {
-                    board.tryMovingCard($0, fromSlot: $1, withPositionOffset: $2)
-                }
+            VStack(alignment: .center) {
+                Spacer()
                 
-                Spacer().frame(height: 80)
+//                SlotRow(slots: board.collectibleSlots)
+                
+//                LineView(style: StrokeStyle(lineWidth: 4), color: Color.white.opacity(0.1))
+//                    .frame(maxHeight: 24)
                 
                 ForEach(0..<board.fieldSlots.count/board.cols) {
                     row in
-                    SlotRow(slots: Array(board.fieldSlots[SlotRow.indexRange(rowIndex: row, cols: board.cols)])) {
-                        card in
-                    } onCardDropped: {
-                        board.tryMovingCard($0, fromSlot: $1, withPositionOffset: $2)
-                    }
+                    SlotRow(slots: Array(board.fieldSlots[SlotRow.indexRange(rowIndex: row, cols: board.cols)]))
                 }
+                
+                Spacer()
+                
+                LineView(
+                    style: StrokeStyle(lineWidth: 4, lineCap: .round, dash: [16]),
+                    color: Color.white.opacity(0.1),
+                    alignment: .top)
+                    .frame(height: 1)
+                
+                SlotRow(slots: Array(repeating: Slot.spacer, count: board.cols))
+                
+                SlotRow(slots: [Slot.spacer, Slot.spacer, board.weaponsSlot, Slot.spacer, Slot.spacer])
+                
+                SlotRow(slots: Array(repeating: Slot.spacer, count: board.cols))
             }
             .resolveLayout(forBoard: board)
         }
-        .padding()
     }
+    
+    // MARK: Private
+    
+    @EnvironmentObject private var board: Board
 }
 
 struct SlotRow: View {
     
     let slots: [Slot]
-    let onCardPicked: ((Card) -> Void)
-    let onCardDropped: ((Card, _ fromSlot: Slot, _ withOffset: CGPoint) -> Void)
+//    let onCardPicked: ((Card) -> Void)
+//    let onCardDropped: ((Card, _ fromSlot: Slot, _ withOffset: CGPoint) -> Void)
     
     var body: some View {
         HStack {
             ForEach(slots) {
                 slot in
-                SlotView(slot: slot) {
-                    onCardPicked($0)
+                SlotView(slot: slot) { _ in
+//                    onCardPicked($0)
                     zIndex = 100
                 } onCardDropped: {
-                    onCardDropped($0, slot, $1)
+//                    onCardDropped($0, slot, $1)
+                    board.tryMovingCard($0, fromSlot: slot, withPositionOffset: $1)
                     zIndex = 0
                 }
                 .anchorBounds(forSlotId: slot.id)
@@ -66,6 +78,7 @@ struct SlotRow: View {
     
     // MARK: Private
     
+    @EnvironmentObject private var board: Board
     @State private var zIndex = Double(0)
 }
 

@@ -1,13 +1,13 @@
 //
-//  GemCard.swift
+//  WeaponCard.swift
 //  CardHunter
 //
-//  Created by Cristian Díaz on 7.9.2020.
+//  Created by Cristian Díaz on 19.10.2020.
 //
 
 import SwiftUI
 
-class GemCard: Card {
+class WeaponCard: Card {
     
     let id: UUID
     let type: CardType
@@ -17,17 +17,17 @@ class GemCard: Card {
     
     init(value: Int) {
         id = UUID()
-        type = .gem
+        type = .weapon
         
-        metrics.set(value: value, forKey: .wealth)
+        metrics.set(value: value, forKey: .attack)
     }
     
     var content: String {
-        "💎"
+        "🗡"
     }
     
     var backgroundColor: Color {
-        Color.grayDark
+        Color.gray
     }
     
     var foregroundColor: Color {
@@ -35,14 +35,6 @@ class GemCard: Card {
     }
     
     var isInvalidated: Bool {
-        consumableValue <= 0
+        false
     }
 }
-
-extension GemCard: Consumable {
-    
-    var consumableKey: CardMetric.Key {
-        .wealth
-    }
-}
-

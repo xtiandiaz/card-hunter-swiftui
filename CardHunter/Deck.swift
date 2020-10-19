@@ -18,12 +18,12 @@ class Deck {
             cards.append(FoodCard(value: Int.random(in: 1...5)))
         }
         
-        for _ in 0..<5 {
-            cards.append(GemCard(value: Int.random(in: 1...3) * 5))
+        for _ in 0..<10 {
+            cards.append(WeaponCard(value: Int.random(in: 3...5)))
         }
         
-        cards.append(contentsOf: Array(repeating: ItemCard(item: .potion), count: 2))
-        cards.append(ItemCard(item: .torch))
+//        cards.append(contentsOf: Array(repeating: ItemCard(item: .potion), count: 2))
+//        cards.append(ItemCard(item: .torch))
         
         cards.shuffle()
     }

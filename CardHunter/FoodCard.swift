@@ -23,7 +23,7 @@ class FoodCard: Card {
     }
     
     var content: String {
-        switch value {
+        switch consumableValue {
         case 1: return "🍬"
         case 2: return "🍫"
         case 3: return "🍕"
@@ -42,17 +42,13 @@ class FoodCard: Card {
     }
     
     var isInvalidated: Bool {
-        value <= 0
+        consumableValue <= 0
     }
 }
 
-extension FoodCard: Edible {
+extension FoodCard: Consumable {
     
-    var value: Int {
-        metrics.safeValue(forKey: .health)
-    }
-    
-    func eat() {
-        metrics.set(value: 0, forKey: .health)
+    var consumableKey: CardMetric.Key {
+        .health
     }
 }

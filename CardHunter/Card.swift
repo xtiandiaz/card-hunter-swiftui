@@ -16,6 +16,7 @@ struct CardType: OptionSet {
     static let food = CardType(rawValue: 1 << 2)
     static let gem = CardType(rawValue: 1 << 3)
     static let item = CardType(rawValue: 1 << 4)
+    static let weapon = CardType(rawValue: 1 << 5)
 }
 
 protocol Card: AnyObject {
@@ -53,25 +54,24 @@ extension Destructible {
     }
 }
 
-protocol Edible {
+protocol Consumable: Card {
     
-    var value: Int { get }
-    
-    func eat()
+    var consumableKey: CardMetric.Key { get }
 }
 
-protocol Cashable {
+extension Consumable {
     
-    var value: Int { get }
+    var consumableValue: Int {
+        metrics.safeValue(forKey: consumableKey)
+    }
     
-    func cash()
+    func consume() {
+        metrics.set(value: 0, forKey: consumableKey)
+    }
 }
 
-protocol Usable {
+protocol Collectible {
     
-    var value: Int { get }
-    
-    func use()
 }
 
 extension Card {
@@ -85,18 +85,15 @@ extension Card {
         case let avatar as AvatarCard:
             switch self {
             case let destructible as Destructible:
-                destructible.damage(withValue: avatar.attack(target: destructible.health))
+//                destructible.damage(withValue: avatar.attack(target: destructible.health))
                 let destructibleHealth = destructible.health
-                if destructibleHealth > 0 {
+//                if destructibleHealth > 0 {
                     destructible.damage(withValue: avatar.health)
                     avatar.damage(withValue: destructibleHealth)
-                }
-            case let edible as Edible:
-                avatar.metrics.add(value: edible.value, toKey: .health)
-                edible.eat()
-            case let cashable as Cashable:
-                avatar.metrics.add(value: cashable.value, toKey: .wealth)
-                cashable.cash()
+//                }
+            case let consumable as Consumable:
+                avatar.metrics.add(value: consumable.consumableValue, toKey: consumable.consumableKey)
+                consumable.consume()
             default:
                 break
             }

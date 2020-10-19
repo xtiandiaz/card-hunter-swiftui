@@ -11,11 +11,13 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
+            
+            Color.black
+                .edgesIgnoringSafeArea(.all)
+            
             BoardView()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black)
-        .edgesIgnoringSafeArea(.all)
     }
 }
 
