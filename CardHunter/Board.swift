@@ -182,7 +182,7 @@ class Board: ObservableObject {
     
     private func setTrail(toDestination destination: Slot) {
         if trail.contains(destination) {
-            trail = [destination]
+            trail.reverse()
         } else {
             trail.append(destination)
         }
@@ -195,7 +195,7 @@ class Board: ObservableObject {
             let card = deck.deal()
         {
             origin.pushCard(card)
-            trail = [destination]
+            trail.remove(at: 0)
         }
     }
     
