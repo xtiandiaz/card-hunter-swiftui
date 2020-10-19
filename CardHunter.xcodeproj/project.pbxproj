@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E24F84BF374C4C7E116A75B /* Pods_CardHunter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0046CE724A45D1F18E10D0 /* Pods_CardHunter.framework */; };
 		850178902533290C009ED351 /* ItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501788F2533290C009ED351 /* ItemCard.swift */; };
 		85BBBAD724FBBD8D00F0372A /* AvatarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBAD624FBBD8D00F0372A /* AvatarCard.swift */; };
 		85BBBAD924FBF2AA00F0372A /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBAD824FBF2AA00F0372A /* Deck.swift */; };
@@ -32,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0842F0E0576DE9F22A4436EC /* Pods-CardHunter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardHunter.debug.xcconfig"; path = "Target Support Files/Pods-CardHunter/Pods-CardHunter.debug.xcconfig"; sourceTree = "<group>"; };
+		20C25EA4AEB4F60B3BD4D39F /* Pods-CardHunter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardHunter.release.xcconfig"; path = "Target Support Files/Pods-CardHunter/Pods-CardHunter.release.xcconfig"; sourceTree = "<group>"; };
 		8501788F2533290C009ED351 /* ItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCard.swift; sourceTree = "<group>"; };
 		85BBBAD624FBBD8D00F0372A /* AvatarCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCard.swift; sourceTree = "<group>"; };
 		85BBBAD824FBF2AA00F0372A /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
@@ -56,6 +59,7 @@
 		85FCC76424FB9743009C60ED /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		85FCC76524FB9743009C60ED /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85FCC76924FB9826009C60ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CA0046CE724A45D1F18E10D0 /* Pods_CardHunter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardHunter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,17 +67,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E24F84BF374C4C7E116A75B /* Pods_CardHunter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		50737E13C398C725E623732F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0842F0E0576DE9F22A4436EC /* Pods-CardHunter.debug.xcconfig */,
+				20C25EA4AEB4F60B3BD4D39F /* Pods-CardHunter.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		85F7959724E9762D00CC9E9C = {
 			isa = PBXGroup;
 			children = (
 				85F795A224E9762D00CC9E9C /* CardHunter */,
 				85F795A124E9762D00CC9E9C /* Products */,
+				50737E13C398C725E623732F /* Pods */,
+				FB61866B1D248090D320D6D6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -147,6 +163,14 @@
 			name = Cards;
 			sourceTree = "<group>";
 		};
+		FB61866B1D248090D320D6D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CA0046CE724A45D1F18E10D0 /* Pods_CardHunter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -154,9 +178,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85F795AF24E9762F00CC9E9C /* Build configuration list for PBXNativeTarget "CardHunter" */;
 			buildPhases = (
+				C9B04C96D46DBEFC43749BAB /* [CP] Check Pods Manifest.lock */,
 				85F7959C24E9762D00CC9E9C /* Sources */,
 				85F7959D24E9762D00CC9E9C /* Frameworks */,
 				85F7959E24E9762D00CC9E9C /* Resources */,
+				925F98CC3CC75CA84ECC3C5F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -211,6 +237,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		925F98CC3CC75CA84ECC3C5F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CardHunter/Pods-CardHunter-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CardHunter/Pods-CardHunter-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CardHunter/Pods-CardHunter-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C9B04C96D46DBEFC43749BAB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CardHunter-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		85F7959C24E9762D00CC9E9C /* Sources */ = {
@@ -304,7 +372,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -360,7 +428,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -373,6 +441,7 @@
 		};
 		85F795B024E9762F00CC9E9C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0842F0E0576DE9F22A4436EC /* Pods-CardHunter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -395,6 +464,7 @@
 		};
 		85F795B124E9762F00CC9E9C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20C25EA4AEB4F60B3BD4D39F /* Pods-CardHunter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
