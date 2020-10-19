@@ -15,71 +15,77 @@ struct SlotView: View {
     let onCardDropped: ((Card, CGPoint) -> Void)
     
     var body: some View {
-        ZStack {
-            if !slot.isEnabled {
-                Color.clear.aspectRatio(Slot.aspectRatio, contentMode: .fit)
-            } else {
-                Cap(fill: Color.white.opacity(0.1), cornerRadius: 8.0)
-                    .zIndex(-1000)
-                
-                ForEach(slot.cards, id: \.id) {
-                    card in
-                    CardView(card: card) {
-                        self.onCardPicked(card)
-                        zIndex = 100
-                    } onCardDropped: {
-                        localOffset in
-                        self.onCardDropped(card, localOffset)
-                        zIndex = 0
+        switch slot.type {
+        case .spacer:
+            return AnyView(
+                Color.clear
+                    .aspectRatio(Slot.aspectRatio, contentMode: .fit)
+            )
+        case .trigger(_):
+            return AnyView(
+                ZStack {
+                    RoundedRectangle(cornerRadius: 8.0, style: .continuous)
+                        .strokeBorder(lineWidth: 2.0)
+                        .foregroundColor(Color.white.opacity(0.15))
+                        .aspectRatio(Slot.aspectRatio, contentMode: .fit)
+                    
+                    CardContentView(content: slot.content)?
+                        .foregroundColor(Color.white.opacity(0.15))
+                }
+            )
+        default:
+            return AnyView(
+                ZStack {
+                    RoundedRectangle(cornerRadius: 8.0, style: .continuous)
+                        .strokeBorder(lineWidth: 2.0)
+                        .foregroundColor(Color.white.opacity(0.15))
+                        .aspectRatio(Slot.aspectRatio, contentMode: .fit)
+                        .zIndex(-1000)
+                    
+                    ForEach(slot.cards, id: \.id) {
+                        card in
+                        CardView(card: card) {
+                            self.onCardPicked(card)
+                            zIndex = 100
+                        } onCardDropped: {
+                            localOffset in
+                            self.onCardDropped(card, localOffset)
+                            zIndex = 0
+                        }
+                        .zIndex(card.zIndex)
+                        .offset(x: 0, y: -Slot.stackedCardOffset * CGFloat(slot.cards.count - 1))
+                        .transition(card.type == .avatar
+                            ? .identity
+                            : .asymmetric(
+                                insertion: AnyTransition.opacity.combined(with: .scale)
+                                    .animation(.easeInOut(duration: 0.5)),
+                                removal: .identity
+                        ))
                     }
-                    .zIndex(card.zIndex)
-                    .transition(card.type == .avatar
-                        ? .identity
-                        : .asymmetric(
-                            insertion: AnyTransition.opacity.combined(with: .scale)
-                                .animation(.easeInOut(duration: 0.5)),
-                            removal: .identity
-                    ))
+                    
+                    Rectangle()
+                        .fill(Color.black)
+                        .overlay(Rectangle().stroke(lineWidth: 2).foregroundColor(Color.black))
+                        .opacity(1.0 * slot.proximityFactor)
+                        .aspectRatio(Slot.aspectRatio, contentMode: .fit)
+                        .zIndex(1100)
                 }
-                
-                if slot.isLocked {
-                    Cap(fill: Color.black.opacity(1), cornerRadius: 0)
-                        .transition(AnyTransition.opacity.animation(.linear(duration: 0.25)))
-                        .zIndex(1000)
-                }
-            }
+                .zIndex(zIndex)
+            )
         }
-        .zIndex(zIndex)
     }
     
     // MARK: Private
     
     @State private var zIndex = Double(0)
-    
-    private struct Cap: View {
-        
-        let fill: Color
-        let cornerRadius: CGFloat
-        
-        var body: some View {
-            RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                .fill(fill)
-                .aspectRatio(Slot.aspectRatio, contentMode: .fit)
+}
+
+struct SlotView_Previews: PreviewProvider {
+    static var previews: some View {
+        SlotView(slot: .trigger(forEvent: .attack(direction: .up))) { _ in
+            
+        } onCardDropped: { _, _ in
+            
         }
     }
 }
-
-//extension AnyTransition {
-//
-//    static var cardDeal: AnyTransition {
-//        get {
-//            AnyTransition.modifier(active: CardDealTranstion(), identity: .identity)
-//        }
-//    }
-//}
-//
-//struct CardDealTranstion: ViewModifier {
-//    func body(content: Content) -> some View {
-//        content.scaleEffect(1)
-//    }
-//}

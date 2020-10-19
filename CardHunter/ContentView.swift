@@ -11,9 +11,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            
             Color.black
-                .edgesIgnoringSafeArea(.all)
             
             BoardView()
         }
@@ -24,5 +22,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(Board(rows: 5, cols: 5, inventoryRows: 1))
     }
 }

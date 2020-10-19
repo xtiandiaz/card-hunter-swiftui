@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import Emerald
 
-enum SlotType {
+enum SlotType: Equatable, Hashable {
     
     case spacer
+    case trigger(event: BoardEvent)
     case field
     case inventory
 }
@@ -22,6 +24,7 @@ class Slot: ObservableObject, Identifiable {
     let capacity: Int
     
     var bounds = CGRect.zero
+    var proximityFactor: Double = 0
     
     var isLocked = false {
         didSet {
@@ -36,10 +39,6 @@ class Slot: ObservableObject, Identifiable {
         self.index = index
         self.type = type
         self.capacity = Int(capacity)
-    }
-    
-    static var aspectRatio: CGFloat {
-        1
     }
     
     var isEnabled: Bool {
@@ -132,9 +131,44 @@ extension Slot: Equatable {
     }
 }
 
+// MARK: - Appearance
+
+extension Slot {
+    
+    static var aspectRatio: CGFloat = 1
+    static var interitemSpacing: CGFloat = 8
+    
+    var content: CardContent {
+        switch type {
+        case .trigger(let event):
+            switch event {
+            case .attack(let direction):
+                switch direction {
+                case .up: return .systemIcon(name: "chevron.up")
+                case .right: return .systemIcon(name: "chevron.right")
+                case .left: return .systemIcon(name: "chevron.left")
+                case .down: return .systemIcon(name: "chevron.down")
+                default: return .none
+                }
+            }
+        default: return .none
+        }
+    }
+    
+    static var stackedCardOffset: CGFloat {
+        8.0
+    }
+}
+
+// MARK: - Templates
+
 extension Slot {
     
     static var spacer: Slot {
         Slot(index: 0, type: .spacer, capacity: 0)
+    }
+    
+    static func trigger(forEvent event: BoardEvent) -> Slot {
+        Slot(index: 0, type: .trigger(event: event), capacity: 1)
     }
 }

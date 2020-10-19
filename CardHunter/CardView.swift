@@ -25,7 +25,7 @@ struct CardView: View {
         self.onCardDropped = onCardDropped
         
         metrics = card.metrics
-        stackOffset = CGSize(width: 0, height: CGFloat(card.stackIndex) * 4.0)
+        stackOffset = CGSize(width: 0, height: CGFloat(card.stackIndex) * Slot.stackedCardOffset)
     }
     
     var body: some View {
@@ -71,24 +71,6 @@ struct CardView: View {
                     foregroundColor: card.foregroundColor
                 )
             }
-            
-//            if let defense = card.metrics[.defense] {
-//                MetricView(
-//                    metric: defense,
-//                    anchor: .bottomLeading,
-//                    showsIcon: card.type == .avatar,
-//                    foregroundColor: card.foregroundColor
-//                )
-//            }
-//
-//            if let wealth = card.metrics[.wealth] {
-//                MetricView(
-//                    metric: wealth,
-//                    anchor: .bottomTrailing,
-//                    showsIcon: card.type == .avatar,
-//                    foregroundColor: card.foregroundColor
-//                )
-//            }
         }
         .aspectRatio(Slot.aspectRatio, contentMode: .fit)
         .scaleEffect(isDragging ? 1.05 : 1)
@@ -118,20 +100,28 @@ struct CardView_Previews: PreviewProvider {
 
 // MARK: - Subviews
 
-private struct CardContentView: View {
+struct CardContentView: View {
     
     let content: CardContent
     
-    var body: some View {
-        view
+    init?(content: CardContent) {
+        guard content != .none else {
+            return nil
+        }
+        self.content = content
     }
     
-    private var view: AnyView {
+    var body: some View {
         switch content {
-        case .systemIcon(let name):
-            return AnyView(Image(systemName: name))
-        case .string(let value):
-            return AnyView(Text(value).font(.system(size: 36)))
+        case .systemIcon(let name): return AnyView(
+            Image(systemName: name)
+                .font(.system(size: 32, weight: .medium))
+        )
+        case .string(let value): return AnyView(
+            Text(value)
+                .font(.system(size: 40))
+        )
+        default: return AnyView(Color.clear)
         }
     }
 }

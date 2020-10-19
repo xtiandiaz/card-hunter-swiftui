@@ -6,6 +6,12 @@
 //
 
 import SwiftUI
+import Emerald
+
+enum BoardEvent: Equatable, Hashable {
+    
+    case attack(direction: Direction)
+}
 
 class Board: ObservableObject {
     
@@ -17,10 +23,18 @@ class Board: ObservableObject {
     lazy var weaponsSlot = addSlot(withType: .inventory, index: 0, capacity: 10)
     lazy var collectibleSlots = slots(forType: .inventory).sorted(by: \.index)
     
+    @Published var avatarLocation: Location
+    @Published var boardOffset: CGSize
+    
     init(rows: Int, cols: Int, inventoryRows: Int) {
         self.rows = rows
         self.cols = cols
         self.collectibleRows = inventoryRows
+        
+        center = Location(col: cols / 2, row: rows / 2)
+        startLocation = center
+        avatarLocation = startLocation
+        boardOffset = .zero
         
         (0..<rows * cols).forEach {
             addSlot(withType: .field, index: $0, capacity: 2)
@@ -87,39 +101,17 @@ class Board: ObservableObject {
         cleanUp()
         
         if didMove, card.type == .avatar {
+            avatarLocation = location(forIndex: destination.index)!
+            
+            withAnimation(.easeIn) {
+                boardOffset = CGSize(
+                    width: CGFloat(center.col - avatarLocation.col) * (startSlot.bounds.width + Slot.interitemSpacing),
+                    height: CGFloat(center.row - avatarLocation.row) * (startSlot.bounds.height + Slot.interitemSpacing))
+            }
+            
             setFogOfWar(atIndex: destination.index)
             
-            setTrail(toDestination: destination)
-        }
-    }
-    
-    func slot(forId id: UUID) -> Slot? {
-        slotForId[id]
-    }
-    
-    func slot(forIndex index: Int) -> Slot? {
-        guard index >= 0, index < rows * cols else {
-            return nil
-        }
-        return slotForIndex[.field]![index]
-    }
-    
-    func slot(forLocation location: Location) -> Slot? {
-        guard let index = index(forLocation: location) else {
-            return nil
-        }
-        return slot(forIndex: index)
-    }
-    
-    func slot(forPosition position: CGPoint) -> Slot? {
-        slotForId.values.first {
-            let origin = $0.bounds.origin
-            let end = $0.bounds.end
-            
-            return position.x >= origin.x &&
-                position.y >= origin.y &&
-                position.x <= end.x &&
-                position.y <= end.y
+//            setTrail(toDestination: destination)
         }
     }
     
@@ -127,13 +119,16 @@ class Board: ObservableObject {
     
     private let deck = Deck()
     private let avatar = AvatarCard(health: 10, attack: 10, defense: 0, wealth: 0)
+    private let center: Location
+    private let startLocation: Location
     
     private var slotForId = [UUID: Slot]()
     private var slotForIndex = [SlotType: [Int: Slot]]()
     private lazy var trail: [Slot] = [startSlot]
     
+    
     private var startSlot: Slot {
-        slot(forLocation: Location(col: 2, row: 2))!
+        slot(forLocation: startLocation)!
     }
     
     private var firstFreeInventorySlot: Slot? {
@@ -142,7 +137,7 @@ class Board: ObservableObject {
     
     private func deal() {
         fieldSlots.forEach {
-            if $0.isEmpty, let card = deck.deal() {
+            if $0.isEmpty, let card = deck.deal(), Double.random(in: 0...1) > 0.5 {
                 $0.pushCard(card)
             }
         }
@@ -151,19 +146,18 @@ class Board: ObservableObject {
     private func setFogOfWar(atIndex index: Int) {
         avatar.locationIndex = index
         
-        slots(forType: .field).forEach {
-            $0.isLocked = true
-        }
-        
         guard let location = self.location(forIndex: index) else {
             return
         }
         
-        slot(forLocation: location)?.isLocked = false
-        slot(forLocation: location.oneUp())?.isLocked = false
-        slot(forLocation: location.oneDown())?.isLocked = false
-        slot(forLocation: location.oneLeft())?.isLocked = false
-        slot(forLocation: location.oneRight())?.isLocked = false
+        let neighborIndices = Set(location.neighbors.compactMap { self.index(forLocation: $0) })
+
+        withAnimation {
+            slots(forType: .field).forEach {
+                $0.proximityFactor = proximity(betweenIndex: $0.index, and: index)
+                $0.isLocked = $0.index != index && !neighborIndices.contains($0.index)
+            }
+        }
     }
     
     private func setTrail(toDestination destination: Slot) {
@@ -224,10 +218,14 @@ class Board: ObservableObject {
 
 extension Board {
     
-    struct Location {
+    struct Location: Hashable {
         
         let col: Int
         let row: Int
+        
+        var neighbors: [Location] {
+            [oneUp(), oneDown(), oneRight(), oneLeft()]
+        }
         
         func oneUp() -> Location {
             Location(col: col, row: row + 1)
@@ -243,6 +241,41 @@ extension Board {
         
         func oneLeft() -> Location {
             Location(col: col - 1, row: row)
+        }
+        
+        func distance(to otherLocation: Location) -> Int {
+            Int(sqrt(pow(Double(otherLocation.col - col), 2) + pow(Double(otherLocation.row - row), 2)).rounded(.up))
+            
+        }
+    }
+    
+    func slot(forId id: UUID) -> Slot? {
+        slotForId[id]
+    }
+    
+    func slot(forIndex index: Int) -> Slot? {
+        guard index >= 0, index < rows * cols else {
+            return nil
+        }
+        return slotForIndex[.field]![index]
+    }
+    
+    func slot(forLocation location: Location) -> Slot? {
+        guard let index = index(forLocation: location) else {
+            return nil
+        }
+        return slot(forIndex: index)
+    }
+    
+    func slot(forPosition position: CGPoint) -> Slot? {
+        slotForId.values.first {
+            let origin = $0.bounds.origin
+            let end = $0.bounds.end
+            
+            return position.x >= origin.x &&
+                position.y >= origin.y &&
+                position.x <= end.x &&
+                position.y <= end.y
         }
     }
     
@@ -265,6 +298,16 @@ extension Board {
     
     private func isValid(location: Location) -> Bool {
         location.col >= 0 && location.col < cols && location.row >= 0 && location.row < rows
+    }
+    
+    private func proximity(betweenIndex index1: Int, and index2: Int) -> Double {
+        guard
+            let location1 = location(forIndex: index1),
+            let location2 = location(forIndex: index2)
+        else {
+            return 0
+        }
+        return Double(location1.distance(to: location2) - 1 ) / 2
     }
 }
 

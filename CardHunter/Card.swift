@@ -19,8 +19,9 @@ struct CardType: OptionSet {
     static let weapon = CardType(rawValue: 1 << 5)
 }
 
-enum CardContent {
+enum CardContent: Equatable {
     
+    case none
     case string(value: String)
     case systemIcon(name: String)
 }
