@@ -19,11 +19,17 @@ struct CardType: OptionSet {
     static let weapon = CardType(rawValue: 1 << 5)
 }
 
+enum CardContent {
+    
+    case string(value: String)
+    case systemIcon(name: String)
+}
+
 protocol Card: AnyObject {
     
     var id: UUID { get }
     var type: CardType { get }
-    var content: String { get }
+    var content: CardContent { get }
     var metrics: CardMetrics { get }
     var stackIndex: Int { get set }
     

@@ -26,8 +26,8 @@ class FoeCard: Card, Destructible {
         print("Foe destroyed!")
     }
     
-    var content: String {
-        "👹"
+    var content: CardContent {
+        .string(value: "👹")
     }
     
     var isInvalidated: Bool {

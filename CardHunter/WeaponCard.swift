@@ -22,8 +22,8 @@ class WeaponCard: Card {
         metrics.set(value: value, forKey: .attack)
     }
     
-    var content: String {
-        "🗡"
+    var content: CardContent {
+        .string(value: "🗡")
     }
     
     var backgroundColor: Color {

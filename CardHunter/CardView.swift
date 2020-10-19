@@ -54,8 +54,7 @@ struct CardView: View {
                 .fill(card.backgroundColor)
                 .shadow(radius: 4)
             
-            Text(card.content)
-                .font(.system(size: 36))
+            CardContentView(content: card.content)
             
             if let health = card.metrics[.health] {
                 MetricView(
@@ -118,6 +117,24 @@ struct CardView_Previews: PreviewProvider {
 }
 
 // MARK: - Subviews
+
+private struct CardContentView: View {
+    
+    let content: CardContent
+    
+    var body: some View {
+        view
+    }
+    
+    private var view: AnyView {
+        switch content {
+        case .systemIcon(let name):
+            return AnyView(Image(systemName: name))
+        case .string(let value):
+            return AnyView(Text(value).font(.system(size: 36)))
+        }
+    }
+}
 
 private struct MetricView: View {
     

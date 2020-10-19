@@ -29,11 +29,11 @@ class ItemCard: Card {
         metrics.add(value: value, toKey: .power)
     }
     
-    var content: String {
+    var content: CardContent {
         switch item {
-        case .potion: return "🧪"
-        case .torch: return "🔦"
-        case .escape: return "💨"
+        case .potion: return .string(value: "🧪")
+        case .torch: return .string(value: "🔦")
+        case .escape: return .string(value: "💨")
         }
     }
     

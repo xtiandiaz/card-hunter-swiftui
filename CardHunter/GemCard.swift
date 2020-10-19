@@ -22,8 +22,8 @@ class GemCard: Card {
         metrics.set(value: value, forKey: .wealth)
     }
     
-    var content: String {
-        "💎"
+    var content: CardContent {
+        .string(value: "💎")
     }
     
     var backgroundColor: Color {

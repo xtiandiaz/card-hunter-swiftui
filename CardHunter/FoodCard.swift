@@ -22,14 +22,14 @@ class FoodCard: Card {
         metrics.set(value: value, forKey: .health)
     }
     
-    var content: String {
+    var content: CardContent {
         switch consumableValue {
-        case 1: return "🍬"
-        case 2: return "🍫"
-        case 3: return "🍕"
-        case 4: return "🍗"
-        case 5: return "🍖"
-        default: return "🥘"
+        case 1: return .string(value: "🍬")
+        case 2: return .string(value: "🍫")
+        case 3: return .string(value: "🍕")
+        case 4: return .string(value: "🍗")
+        case 5: return .string(value: "🍖")
+        default: return .string(value: "🥘")
         }
     }
     

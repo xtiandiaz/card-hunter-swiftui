@@ -30,16 +30,12 @@ class AvatarCard: Card, Destructible, Movable {
         print("You died!")
     }
     
-    var content: String {
+    var content: CardContent {
         switch health {
-        case 0:
-            return "💀"
-        case 1...3:
-            return "😨"
-        case 4...6:
-            return "😬"
-        default:
-            return "😎"
+        case 0: return .string(value: "💀")
+        case 1...3: return .string(value: "😨")
+        case 4...6: return .string(value: "😬")
+        default: return .string(value: "😎")
         }
     }
     
