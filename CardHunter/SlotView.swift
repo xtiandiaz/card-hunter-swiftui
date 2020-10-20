@@ -38,7 +38,7 @@ struct SlotView: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 8.0, style: .continuous)
                         .strokeBorder(lineWidth: 2.0)
-                        .foregroundColor(Color.white.opacity(0.15))
+                        .foregroundColor(Color.white.opacity(0.15 * slot.proximityFactor))
                         .aspectRatio(Slot.aspectRatio, contentMode: .fit)
                         .zIndex(-1000)
                     
@@ -62,13 +62,6 @@ struct SlotView: View {
                                 removal: .identity
                         ))
                     }
-                    
-                    Rectangle()
-                        .fill(Color.black)
-                        .overlay(Rectangle().stroke(lineWidth: 2).foregroundColor(Color.black))
-                        .opacity(1.0 * slot.proximityFactor)
-                        .aspectRatio(Slot.aspectRatio, contentMode: .fit)
-                        .zIndex(1100)
                 }
                 .zIndex(zIndex)
             )

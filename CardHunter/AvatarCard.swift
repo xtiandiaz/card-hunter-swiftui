@@ -12,6 +12,7 @@ class AvatarCard: Card, Destructible, Movable {
     let id: UUID
     let type: CardType
     let metrics = CardMetrics()
+    let style = CardStyle(backgroundColor: .yellow, foregroundColor: .black)
     
     var stackIndex = 0
     var locationIndex: Int?
@@ -21,9 +22,6 @@ class AvatarCard: Card, Destructible, Movable {
         type = .avatar
         
         metrics.set(value: health, forKey: .health)
-//        metrics.set(value: attack, forKey: .attack)
-//        metrics.set(value: defense, forKey: .defense)
-//        metrics.set(value: wealth, forKey: .wealth)
     }
     
     deinit {
@@ -41,14 +39,6 @@ class AvatarCard: Card, Destructible, Movable {
     
     var isInvalidated: Bool {
         health <= 0
-    }
-    
-    var backgroundColor: Color {
-        Color.yellow
-    }
-    
-    var foregroundColor: Color {
-        Color.black
     }
     
     func attack(target: Int) -> Int {

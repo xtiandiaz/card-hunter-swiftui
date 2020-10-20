@@ -12,6 +12,7 @@ class WeaponCard: Card {
     let id: UUID
     let type: CardType
     let metrics = CardMetrics()
+    let style = CardStyle(backgroundColor: .gray, foregroundColor: .white)
     
     var stackIndex = 0
     
@@ -24,14 +25,6 @@ class WeaponCard: Card {
     
     var content: CardContent {
         .string(value: "🗡")
-    }
-    
-    var backgroundColor: Color {
-        Color.gray
-    }
-    
-    var foregroundColor: Color {
-        Color.white
     }
     
     var isInvalidated: Bool {

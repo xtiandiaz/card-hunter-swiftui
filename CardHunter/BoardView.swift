@@ -12,14 +12,7 @@ struct BoardView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            VStack {
-                Spacer()
-
-                Spacer().frame(height: 32)
-            }
-            .frame(maxWidth: .infinity)
-            .background(Color.black)
-            .zIndex(1)
+            Spacer()
             
             VStack(spacing: Slot.interitemSpacing) {
                 Spacer().frame(height: Slot.interitemSpacing)

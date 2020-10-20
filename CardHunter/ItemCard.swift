@@ -18,6 +18,7 @@ class ItemCard: Card {
     let type: CardType
     let item: Item
     let metrics = CardMetrics()
+    let style = CardStyle(backgroundColor: .green, foregroundColor: .white)
     
     var stackIndex = 0
     
@@ -39,14 +40,6 @@ class ItemCard: Card {
     
     var isInvalidated: Bool {
         consumableValue <= 0
-    }
-    
-    var backgroundColor: Color {
-        Color.green
-    }
-    
-    var foregroundColor: Color {
-        Color.white
     }
 }
 

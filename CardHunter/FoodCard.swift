@@ -12,6 +12,7 @@ class FoodCard: Card {
     let id: UUID
     let type: CardType
     let metrics = CardMetrics()
+    let style = CardStyle(backgroundColor: .grayDark, foregroundColor: .white)
     
     var stackIndex = 0
     
@@ -31,14 +32,6 @@ class FoodCard: Card {
         case 5: return .string(value: "🍖")
         default: return .string(value: "🥘")
         }
-    }
-    
-    var backgroundColor: Color {
-        Color.grayDark
-    }
-    
-    var foregroundColor: Color {
-        Color.white
     }
     
     var isInvalidated: Bool {

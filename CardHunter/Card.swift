@@ -26,6 +26,19 @@ enum CardContent: Equatable {
     case systemIcon(name: String)
 }
 
+class CardStyle {
+    
+    let backgroundColor: Color
+    let foregroundColor: Color
+    var lightness: Double
+    
+    init(backgroundColor: Color, foregroundColor: Color) {
+        self.backgroundColor = backgroundColor
+        self.foregroundColor = foregroundColor
+        lightness = 1.0
+    }
+}
+
 protocol Card: AnyObject {
     
     var id: UUID { get }
@@ -36,8 +49,7 @@ protocol Card: AnyObject {
     
     var isInvalidated: Bool { get }
     
-    var backgroundColor: Color { get }
-    var foregroundColor: Color { get }
+    var style: CardStyle { get }
 }
 
 protocol Movable { }

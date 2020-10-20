@@ -7,16 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02A85D063CAF5A9C82A1A1C541DDF9DE /* Emerald-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 103947115972B11A2189EA53982532DC /* Emerald-dummy.m */; };
+		133CD878ADECECC5AC92F7542071820E /* AnimatedSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F105EE8B8022D97E5D17AD4F150C23 /* AnimatedSprite.swift */; };
 		1B715D06CDD51D37ECAC8F520E2FB5B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		3E35D0A2F8BE3C8D1275F1531EE3C22D /* AnimatedSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48A73D7E6ADC22388471B2308664945 /* AnimatedSprite.swift */; };
+		337AE51B15F88F295BF57659EDB9CF6F /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB399AC4837F03678B5833920558D9 /* Direction.swift */; };
+		64482623C0B0792C0FBC8EEFE9CC1584 /* Emerald-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 017531DBE0BD28290630128EE6D83569 /* Emerald-dummy.m */; };
+		69492E665671D88DB454793DFC9817D3 /* RangeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900EA8183039D9AC806CAFDFC010A34B /* RangeExtensions.swift */; };
+		7887105F345531EFAA55291C5A39DD48 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = F358C7CFDE776C605F6089AED2BAAED7 /* Line.swift */; };
 		7CFCF3B9FD072F800CD606ABAC783C28 /* Pods-CardHunter-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 191F7F350E2316E65131F8A0B0BECDF5 /* Pods-CardHunter-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		89E16DA9AF061B82E4A2DBA2B08732E0 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1D7871806DF0B59793186073948C92 /* Direction.swift */; };
-		9470814EF31824FC85A8E1EBF22C4311 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E936CBAF2E1C591C6FDBEAD0517D43 /* Line.swift */; };
+		7F8D3F1FA5A9F8E0005C3B47424F9468 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		9B2BBB6000C5B47EE6CFFB7DEF334BB0 /* ConnectableTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7266E4C49CD2665FFFAE111AC6CDBB28 /* ConnectableTimer.swift */; };
+		A5087701AF2C779044424F61605A8508 /* Emerald-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 933F0F786832DF7F5EA0F0DB4BF77BD5 /* Emerald-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D1B6DB43BFF9FEADC8AE6FEF34741E48 /* Pods-CardHunter-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 096880F505A7575751D424C2D7D3698E /* Pods-CardHunter-dummy.m */; };
-		D59696AA2B11CCA54F43F6BB1A920053 /* ConnectableTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64064B8AB0EDA1591D14FC7A0F0C8EF /* ConnectableTimer.swift */; };
-		E42CBE3F4B32A4E7F2DD724852E583AE /* Emerald-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 23DA1C803F63E9AAB75A8EC90B9C142E /* Emerald-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F8D866B53B74FA7B7DF0BA4C421FAB79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,33 +31,34 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01C6691AD6A2200926E6D976380F25B3 /* Emerald.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = Emerald.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		017531DBE0BD28290630128EE6D83569 /* Emerald-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Emerald-dummy.m"; sourceTree = "<group>"; };
 		096880F505A7575751D424C2D7D3698E /* Pods-CardHunter-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CardHunter-dummy.m"; sourceTree = "<group>"; };
-		0993486A703E97C91B18434BF4DB33B9 /* Emerald-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Emerald-prefix.pch"; sourceTree = "<group>"; };
 		0AB9A7ECA2C691F9A6F5A42C5E6C3FF8 /* Pods-CardHunter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CardHunter.release.xcconfig"; sourceTree = "<group>"; };
-		103947115972B11A2189EA53982532DC /* Emerald-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Emerald-dummy.m"; sourceTree = "<group>"; };
-		11E3998C4ABACCEDB658CAB31A34E33D /* Emerald.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Emerald.modulemap; sourceTree = "<group>"; };
 		191F7F350E2316E65131F8A0B0BECDF5 /* Pods-CardHunter-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CardHunter-umbrella.h"; sourceTree = "<group>"; };
-		23DA1C803F63E9AAB75A8EC90B9C142E /* Emerald-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Emerald-umbrella.h"; sourceTree = "<group>"; };
-		2EADB80EB41AF24ED0D1620FAD407134 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		19F105EE8B8022D97E5D17AD4F150C23 /* AnimatedSprite.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnimatedSprite.swift; path = Emerald/AnimatedSprite.swift; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		33453C0460ED19A89353850CB875E184 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		38BCF774D6CF1644A1A9EA0964FCB85B /* Pods_CardHunter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_CardHunter.framework; path = "Pods-CardHunter.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A4FF24ED6CA0562B3D1C5B5801DBC73 /* Pods-CardHunter.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CardHunter.modulemap"; sourceTree = "<group>"; };
 		4FE2DB6209936F7B6486960FDD4EEAA4 /* Emerald.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Emerald.framework; path = Emerald.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53CBF80F4AF50653F9A1B85DB0B7E439 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		541AA7415B810F87D6DFA7FD17134304 /* Emerald.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = Emerald.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5EA19E283148616D32DD99F19D539A0C /* Pods-CardHunter-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CardHunter-acknowledgements.markdown"; sourceTree = "<group>"; };
-		63D829BCD942AD97E3D734089592AEA3 /* Emerald-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Emerald-Info.plist"; sourceTree = "<group>"; };
 		661C2C74FB4AD9C0041CC238F1610CB5 /* Pods-CardHunter-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CardHunter-acknowledgements.plist"; sourceTree = "<group>"; };
+		7266E4C49CD2665FFFAE111AC6CDBB28 /* ConnectableTimer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConnectableTimer.swift; path = Emerald/ConnectableTimer.swift; sourceTree = "<group>"; };
 		74AD136E2DB66AD1AC9369C839C4E5E5 /* Pods-CardHunter-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CardHunter-Info.plist"; sourceTree = "<group>"; };
 		85E351CE2DD10780D738468FBF475B62 /* Pods-CardHunter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CardHunter.debug.xcconfig"; sourceTree = "<group>"; };
+		900EA8183039D9AC806CAFDFC010A34B /* RangeExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RangeExtensions.swift; path = Emerald/RangeExtensions.swift; sourceTree = "<group>"; };
+		933F0F786832DF7F5EA0F0DB4BF77BD5 /* Emerald-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Emerald-umbrella.h"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		AAE688908CBCEAFC18D137B1FDD084A6 /* Emerald.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Emerald.release.xcconfig; sourceTree = "<group>"; };
-		B3E936CBAF2E1C591C6FDBEAD0517D43 /* Line.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Line.swift; path = Emerald/Line.swift; sourceTree = "<group>"; };
-		BC1D7871806DF0B59793186073948C92 /* Direction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Direction.swift; path = Emerald/Direction.swift; sourceTree = "<group>"; };
+		BEA32E3077A4F992B17BE4DBF919E7D9 /* Emerald-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Emerald-prefix.pch"; sourceTree = "<group>"; };
 		D890C87EF7DD8A03DF8A14D5B18655DB /* Pods-CardHunter-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CardHunter-frameworks.sh"; sourceTree = "<group>"; };
-		DBB48A2B9CAFF4DD8671338704D2B741 /* Emerald.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Emerald.debug.xcconfig; sourceTree = "<group>"; };
-		E48A73D7E6ADC22388471B2308664945 /* AnimatedSprite.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnimatedSprite.swift; path = Emerald/AnimatedSprite.swift; sourceTree = "<group>"; };
-		F64064B8AB0EDA1591D14FC7A0F0C8EF /* ConnectableTimer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConnectableTimer.swift; path = Emerald/ConnectableTimer.swift; sourceTree = "<group>"; };
-		FEB7D75EBE596B51768C14947D15B855 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		DC246FEAB829B25434C31B95ACF859D4 /* Emerald.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Emerald.release.xcconfig; sourceTree = "<group>"; };
+		F358C7CFDE776C605F6089AED2BAAED7 /* Line.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Line.swift; path = Emerald/Line.swift; sourceTree = "<group>"; };
+		F44D9FEC9ABFCC8BC269BF7BA21F6C21 /* Emerald.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Emerald.debug.xcconfig; sourceTree = "<group>"; };
+		F7DB399AC4837F03678B5833920558D9 /* Direction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Direction.swift; path = Emerald/Direction.swift; sourceTree = "<group>"; };
+		FB7073B7BAA2603F1838906BDDB1E971 /* Emerald.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Emerald.modulemap; sourceTree = "<group>"; };
+		FEF0A51E89A060E709F4F8B53206C7E5 /* Emerald-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Emerald-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,62 +70,45 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		960187F520EBE86CA298A513C40271A1 /* Frameworks */ = {
+		9402DD8A7B80A0EEBE3BA7D4BDDD574A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8D866B53B74FA7B7DF0BA4C421FAB79 /* Foundation.framework in Frameworks */,
+				7F8D3F1FA5A9F8E0005C3B47424F9468 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		398D7A30256FAB2CD901CCF31FE2BF81 /* Pod */ = {
+		7C0271CA0680A66C271C748D67C01B86 /* Emerald */ = {
 			isa = PBXGroup;
 			children = (
-				01C6691AD6A2200926E6D976380F25B3 /* Emerald.podspec */,
-				2EADB80EB41AF24ED0D1620FAD407134 /* LICENSE */,
-				FEB7D75EBE596B51768C14947D15B855 /* README.md */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
-		4EF5D3F056A9633AD430A5910849BEE8 /* Emerald */ = {
-			isa = PBXGroup;
-			children = (
-				E48A73D7E6ADC22388471B2308664945 /* AnimatedSprite.swift */,
-				F64064B8AB0EDA1591D14FC7A0F0C8EF /* ConnectableTimer.swift */,
-				BC1D7871806DF0B59793186073948C92 /* Direction.swift */,
-				B3E936CBAF2E1C591C6FDBEAD0517D43 /* Line.swift */,
-				398D7A30256FAB2CD901CCF31FE2BF81 /* Pod */,
-				69F7A212D744F7AB0F1829FEA6D5FB9D /* Support Files */,
+				19F105EE8B8022D97E5D17AD4F150C23 /* AnimatedSprite.swift */,
+				7266E4C49CD2665FFFAE111AC6CDBB28 /* ConnectableTimer.swift */,
+				F7DB399AC4837F03678B5833920558D9 /* Direction.swift */,
+				F358C7CFDE776C605F6089AED2BAAED7 /* Line.swift */,
+				900EA8183039D9AC806CAFDFC010A34B /* RangeExtensions.swift */,
+				E4840CD631F35008C36A4AB00FF229CF /* Pod */,
+				B4CBC604BBFA616A550C7F7243E0D5F1 /* Support Files */,
 			);
 			name = Emerald;
 			path = ../../Emerald;
 			sourceTree = "<group>";
 		};
-		69F7A212D744F7AB0F1829FEA6D5FB9D /* Support Files */ = {
+		B4CBC604BBFA616A550C7F7243E0D5F1 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				11E3998C4ABACCEDB658CAB31A34E33D /* Emerald.modulemap */,
-				103947115972B11A2189EA53982532DC /* Emerald-dummy.m */,
-				63D829BCD942AD97E3D734089592AEA3 /* Emerald-Info.plist */,
-				0993486A703E97C91B18434BF4DB33B9 /* Emerald-prefix.pch */,
-				23DA1C803F63E9AAB75A8EC90B9C142E /* Emerald-umbrella.h */,
-				DBB48A2B9CAFF4DD8671338704D2B741 /* Emerald.debug.xcconfig */,
-				AAE688908CBCEAFC18D137B1FDD084A6 /* Emerald.release.xcconfig */,
+				FB7073B7BAA2603F1838906BDDB1E971 /* Emerald.modulemap */,
+				017531DBE0BD28290630128EE6D83569 /* Emerald-dummy.m */,
+				FEF0A51E89A060E709F4F8B53206C7E5 /* Emerald-Info.plist */,
+				BEA32E3077A4F992B17BE4DBF919E7D9 /* Emerald-prefix.pch */,
+				933F0F786832DF7F5EA0F0DB4BF77BD5 /* Emerald-umbrella.h */,
+				F44D9FEC9ABFCC8BC269BF7BA21F6C21 /* Emerald.debug.xcconfig */,
+				DC246FEAB829B25434C31B95ACF859D4 /* Emerald.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../CardHunter/Pods/Target Support Files/Emerald";
-			sourceTree = "<group>";
-		};
-		6DC6F114686AD2A7CC3FEBE0EA0054E5 /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				4EF5D3F056A9633AD430A5910849BEE8 /* Emerald */,
-			);
-			name = "Development Pods";
 			sourceTree = "<group>";
 		};
 		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
@@ -134,11 +119,19 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		CB5060E9373EA59F8F2CA6756FB35801 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7C0271CA0680A66C271C748D67C01B86 /* Emerald */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				6DC6F114686AD2A7CC3FEBE0EA0054E5 /* Development Pods */,
+				CB5060E9373EA59F8F2CA6756FB35801 /* Development Pods */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
 				EFC0B257848B1BD3DDCECF2B359CBD62 /* Products */,
 				E5CAB0E31F7EC747DC0E1F48BA162378 /* Targets Support Files */,
@@ -151,6 +144,16 @@
 				C0834CEBB1379A84116EF29F93051C60 /* iOS */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4840CD631F35008C36A4AB00FF229CF /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				541AA7415B810F87D6DFA7FD17134304 /* Emerald.podspec */,
+				33453C0460ED19A89353850CB875E184 /* LICENSE */,
+				53CBF80F4AF50653F9A1B85DB0B7E439 /* README.md */,
+			);
+			name = Pod;
 			sourceTree = "<group>";
 		};
 		E5CAB0E31F7EC747DC0E1F48BA162378 /* Targets Support Files */ = {
@@ -190,11 +193,11 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		2ADFBC2C91D056E9CA006E3A986D23B1 /* Headers */ = {
+		04745F9CE75E1EF581B985042BFC7107 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E42CBE3F4B32A4E7F2DD724852E583AE /* Emerald-umbrella.h in Headers */,
+				A5087701AF2C779044424F61605A8508 /* Emerald-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,12 +233,12 @@
 		};
 		4F6816301206B7D4772CDE9A420D2883 /* Emerald */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 880BDC18222F443AF3B129E4BE040B77 /* Build configuration list for PBXNativeTarget "Emerald" */;
+			buildConfigurationList = 3A59A1E97E56D7A167E240258BCFA465 /* Build configuration list for PBXNativeTarget "Emerald" */;
 			buildPhases = (
-				2ADFBC2C91D056E9CA006E3A986D23B1 /* Headers */,
-				C38B90CC40101DBD4CA4E1DE342CB589 /* Sources */,
-				960187F520EBE86CA298A513C40271A1 /* Frameworks */,
-				D1CE4EE03D172080E1E26EF8EE14A23D /* Resources */,
+				04745F9CE75E1EF581B985042BFC7107 /* Headers */,
+				3860CEE1564370B69B0ACAE9140B3026 /* Sources */,
+				9402DD8A7B80A0EEBE3BA7D4BDDD574A /* Frameworks */,
+				415164C5D02871FBC4854FE8ACA876FD /* Resources */,
 			);
 			buildRules = (
 			);
@@ -282,7 +285,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D1CE4EE03D172080E1E26EF8EE14A23D /* Resources */ = {
+		415164C5D02871FBC4854FE8ACA876FD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -300,15 +303,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C38B90CC40101DBD4CA4E1DE342CB589 /* Sources */ = {
+		3860CEE1564370B69B0ACAE9140B3026 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E35D0A2F8BE3C8D1275F1531EE3C22D /* AnimatedSprite.swift in Sources */,
-				D59696AA2B11CCA54F43F6BB1A920053 /* ConnectableTimer.swift in Sources */,
-				89E16DA9AF061B82E4A2DBA2B08732E0 /* Direction.swift in Sources */,
-				02A85D063CAF5A9C82A1A1C541DDF9DE /* Emerald-dummy.m in Sources */,
-				9470814EF31824FC85A8E1EBF22C4311 /* Line.swift in Sources */,
+				133CD878ADECECC5AC92F7542071820E /* AnimatedSprite.swift in Sources */,
+				9B2BBB6000C5B47EE6CFFB7DEF334BB0 /* ConnectableTimer.swift in Sources */,
+				337AE51B15F88F295BF57659EDB9CF6F /* Direction.swift in Sources */,
+				64482623C0B0792C0FBC8EEFE9CC1584 /* Emerald-dummy.m in Sources */,
+				7887105F345531EFAA55291C5A39DD48 /* Line.swift in Sources */,
+				69492E665671D88DB454793DFC9817D3 /* RangeExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,9 +388,9 @@
 			};
 			name = Release;
 		};
-		15B3C95269A44B6D7685436226A17931 /* Debug */ = {
+		163725F55821F298D1FEDC18C5BAD9FA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DBB48A2B9CAFF4DD8671338704D2B741 /* Emerald.debug.xcconfig */;
+			baseConfigurationReference = F44D9FEC9ABFCC8BC269BF7BA21F6C21 /* Emerald.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -497,9 +501,9 @@
 			};
 			name = Release;
 		};
-		7CF6EA6AA5A6D0455A6604C9503E0070 /* Release */ = {
+		594BBAAEA81DCD03394E1C5E32F2D116 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AAE688908CBCEAFC18D137B1FDD084A6 /* Emerald.release.xcconfig */;
+			baseConfigurationReference = DC246FEAB829B25434C31B95ACF859D4 /* Emerald.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -610,20 +614,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		3A59A1E97E56D7A167E240258BCFA465 /* Build configuration list for PBXNativeTarget "Emerald" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				163725F55821F298D1FEDC18C5BAD9FA /* Debug */,
+				594BBAAEA81DCD03394E1C5E32F2D116 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED7888FA6713EABBF66D26A8003AD1CA /* Debug */,
 				1422B121EAEAEA11307496903FA623C6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		880BDC18222F443AF3B129E4BE040B77 /* Build configuration list for PBXNativeTarget "Emerald" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				15B3C95269A44B6D7685436226A17931 /* Debug */,
-				7CF6EA6AA5A6D0455A6604C9503E0070 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

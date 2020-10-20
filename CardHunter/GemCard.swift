@@ -12,6 +12,7 @@ class GemCard: Card {
     let id: UUID
     let type: CardType
     let metrics = CardMetrics()
+    let style = CardStyle(backgroundColor: .grayDark, foregroundColor: .white)
     
     var stackIndex = 0
     
@@ -24,14 +25,6 @@ class GemCard: Card {
     
     var content: CardContent {
         .string(value: "💎")
-    }
-    
-    var backgroundColor: Color {
-        Color.grayDark
-    }
-    
-    var foregroundColor: Color {
-        Color.white
     }
     
     var isInvalidated: Bool {

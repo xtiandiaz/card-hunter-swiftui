@@ -24,7 +24,14 @@ class Slot: ObservableObject, Identifiable {
     let capacity: Int
     
     var bounds = CGRect.zero
-    var proximityFactor: Double = 0
+    
+    var proximityFactor: Double = 1.0 {
+        didSet {
+            cards.forEach {
+                $0.style.lightness = proximityFactor
+            }
+        }
+    }
     
     var isLocked = false {
         didSet {

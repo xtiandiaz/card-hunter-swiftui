@@ -10,15 +10,16 @@ import SwiftUI
 struct CardView: View {
     
     let card: Card
-    let onCardPicked: (() -> Void)
-    let onCardDropped: ((CGPoint) -> Void)
+    
+    var onCardPicked: (() -> ())?
+    var onCardDropped: ((CGPoint) -> ())?
     
     @ObservedObject var metrics: CardMetrics
     
     init(
         card: Card,
-        onCardPicked: @escaping (() -> Void),
-        onCardDropped: @escaping ((CGPoint) -> Void)
+        onCardPicked: (() -> ())? = nil,
+        onCardDropped: ((CGPoint) -> ())? = nil
     ) {
         self.card = card
         self.onCardPicked = onCardPicked
@@ -34,11 +35,11 @@ struct CardView: View {
                 self.isDragging = true
                 self.draggingOffset = $0.translation
                 
-                onCardPicked()
+                onCardPicked?()
             }
             .onEnded {
                 value in
-                onCardDropped(CGPoint(
+                onCardDropped?(CGPoint(
                     x: value.translation.width,
                     y: value.translation.height
                 ))
@@ -51,7 +52,7 @@ struct CardView: View {
         
         return ZStack {
             RoundedRectangle(cornerRadius: 8.0, style: .continuous)
-                .fill(card.backgroundColor)
+                .fill(card.style.backgroundColor)
                 .shadow(radius: 4)
             
             CardContentView(content: card.content)
@@ -60,7 +61,7 @@ struct CardView: View {
                 MetricView(
                     metric: health,
                     anchor: .top,
-                    foregroundColor: card.foregroundColor
+                    foregroundColor: card.style.foregroundColor
                 )
             }
             
@@ -68,10 +69,11 @@ struct CardView: View {
                 MetricView(
                     metric: attack,
                     anchor: .top,
-                    foregroundColor: card.foregroundColor
+                    foregroundColor: card.style.foregroundColor
                 )
             }
         }
+        .lightness(card.style.lightness)
         .aspectRatio(Slot.aspectRatio, contentMode: .fit)
         .scaleEffect(isDragging ? 1.05 : 1)
         .offset(draggingOffset + stackOffset)
@@ -95,6 +97,27 @@ struct CardView_Previews: PreviewProvider {
         CardView(card: AvatarCard(health: 10, attack: 5, defense: 0, wealth: 0)) {
         } onCardDropped: { _ in
         }
+    }
+}
+
+// MARK: - Modifiers
+
+private extension View {
+    
+    func lightness(_ lightness: Double) -> some View {
+        modifier(CardLightnessModifier(lightness: lightness))
+    }
+}
+
+private struct CardLightnessModifier: ViewModifier {
+    
+    let lightness: Double
+    
+    func body(content: Content) -> some View {
+        content.overlay(
+            RoundedRectangle(cornerRadius: 8.0, style: .continuous)
+                .fill(Color.black)
+                .opacity(1.0 - lightness))
     }
 }
 

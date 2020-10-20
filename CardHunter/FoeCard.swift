@@ -12,6 +12,7 @@ class FoeCard: Card, Destructible {
     let id: UUID
     let type: CardType
     let metrics = CardMetrics()
+    let style = CardStyle(backgroundColor: .red, foregroundColor: .white)
     
     var stackIndex = 0
     
@@ -32,13 +33,5 @@ class FoeCard: Card, Destructible {
     
     var isInvalidated: Bool {
         health <= 0
-    }
-    
-    var backgroundColor: Color {
-        Color.red
-    }
-    
-    var foregroundColor: Color {
-        Color.white
     }
 }

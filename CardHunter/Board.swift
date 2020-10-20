@@ -111,7 +111,7 @@ class Board: ObservableObject {
             
             setFogOfWar(atIndex: destination.index)
             
-//            setTrail(toDestination: destination)
+            setTrail(toDestination: destination)
         }
     }
     
@@ -307,7 +307,9 @@ extension Board {
         else {
             return 0
         }
-        return Double(location1.distance(to: location2) - 1 ) / 2
+        return 1.0 - (0...1.0).clamp(
+            value: (Double(location1.distance(to: location2)) - 1.0) / 2
+        )
     }
 }
 
