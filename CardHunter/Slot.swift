@@ -25,6 +25,10 @@ class Slot: ObservableObject, Identifiable {
     
     var bounds = CGRect.zero
     
+    var topCard: Card? {
+        cards.first
+    }
+    
     var proximityFactor: Double = 1.0 {
         didSet {
             cards.forEach {
@@ -54,6 +58,14 @@ class Slot: ObservableObject, Identifiable {
     
     var isEmpty: Bool {
         cards.isEmpty
+    }
+    
+    var isActionable: Bool {
+        guard !isLocked, let topCard = topCard else {
+            return false
+        }
+        
+        return topCard is Movable
     }
     
     var cardMask: CardType {

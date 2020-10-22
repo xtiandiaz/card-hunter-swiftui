@@ -51,6 +51,72 @@ class Board: ObservableObject {
         setFogOfWar(atIndex: startSlot.index)
     }
     
+    func tryMovingCard(fromSlot origin: Slot, toward direction: Direction) -> Bool {
+        guard
+            let start = location(forIndex: origin.index),
+            let destination = self.slot(forLocation: start.oneToward(direction: direction)),
+            let card = origin.topCard
+        else {
+            return false
+        }
+        
+        var didMove = false
+        
+        if destination.isEmpty {
+            if destination.pushCard(card) {
+                origin.popCard()
+                didMove = true
+            }
+        } else if let target = destination.cards.first {
+            if target.type == .weapon,
+               weaponsSlot.pushCard(target)
+            {
+                destination.popCard()
+                
+                if destination.pushCard(card) {
+                    origin.popCard()
+                    didMove = true
+                }
+            } else if
+                target.type == .item,
+                let invSlot = firstFreeInventorySlot,
+                invSlot.pushCard(target)
+            {
+                destination.popCard()
+                
+                if destination.pushCard(card) {
+                    origin.popCard()
+                    didMove = true
+                }
+            } else {
+                target.apply(other: card)
+                
+                if target.isInvalidated, destination.pushCard(card) {
+                    origin.popCard()
+                    didMove = true
+                }
+            }
+        }
+        
+        cleanUp()
+        
+        if didMove, card.type == .avatar {
+            avatarLocation = location(forIndex: destination.index)!
+            
+            withAnimation(.easeIn) {
+                boardOffset = CGSize(
+                    width: CGFloat(center.col - avatarLocation.col) * (startSlot.bounds.width + Slot.interitemSpacing),
+                    height: CGFloat(center.row - avatarLocation.row) * (startSlot.bounds.height + Slot.interitemSpacing))
+            }
+            
+            setFogOfWar(atIndex: destination.index)
+            
+            setTrail(toDestination: destination)
+        }
+        
+        return didMove
+    }
+    
     func tryMovingCard(_ card: Card, fromSlot origin: Slot, withPositionOffset offset: CGPoint) {
         guard
             let destination = slot(forPosition: origin.bounds.center + offset),
@@ -151,7 +217,7 @@ class Board: ObservableObject {
         }
         
         let neighborIndices = Set(location.neighbors.compactMap { self.index(forLocation: $0) })
-
+        
         withAnimation {
             slots(forType: .field).forEach {
                 $0.proximityFactor = proximity(betweenIndex: $0.index, and: index)
@@ -228,11 +294,11 @@ extension Board {
         }
         
         func oneUp() -> Location {
-            Location(col: col, row: row + 1)
+            Location(col: col, row: row - 1)
         }
         
         func oneDown() -> Location {
-            Location(col: col, row: row - 1)
+            Location(col: col, row: row + 1)
         }
         
         func oneRight() -> Location {
@@ -241,6 +307,15 @@ extension Board {
         
         func oneLeft() -> Location {
             Location(col: col - 1, row: row)
+        }
+        
+        func oneToward(direction: Direction) -> Location {
+            switch direction {
+            case .up: return Location(col: col, row: row - 1)
+            case .right: return Location(col: col + 1, row: row)
+            case .down: return Location(col: col, row: row + 1)
+            case .left: return Location(col: col - 1, row: row)
+            }
         }
         
         func distance(to otherLocation: Location) -> Int {

@@ -11,46 +11,16 @@ struct CardView: View {
     
     let card: Card
     
-    var onCardPicked: (() -> ())?
-    var onCardDropped: ((CGPoint) -> ())?
+    @State var isDragging = false
     
-    @ObservedObject var metrics: CardMetrics
-    
-    init(
-        card: Card,
-        onCardPicked: (() -> ())? = nil,
-        onCardDropped: ((CGPoint) -> ())? = nil
-    ) {
+    init(card: Card) {
         self.card = card
-        self.onCardPicked = onCardPicked
-        self.onCardDropped = onCardDropped
         
         metrics = card.metrics
-        stackOffset = CGSize(width: 0, height: CGFloat(card.stackIndex) * Slot.stackedCardOffset)
     }
     
     var body: some View {
-        let dragGesture = DragGesture(minimumDistance: 0)
-            .onChanged {
-                self.isDragging = true
-                self.draggingOffset = $0.translation
-                
-                onCardPicked?()
-            }
-            .onEnded {
-                value in
-                onCardDropped?(CGPoint(
-                    x: value.translation.width,
-                    y: value.translation.height
-                ))
-                
-                withAnimation(.easeOut(duration: 0.1)) {
-                    self.draggingOffset = .zero
-                    self.isDragging = false
-                }
-            }
-        
-        return ZStack {
+        ZStack {
             RoundedRectangle(cornerRadius: 8.0, style: .continuous)
                 .fill(card.style.backgroundColor)
                 .shadow(radius: 4)
@@ -73,51 +43,18 @@ struct CardView: View {
                 )
             }
         }
-        .lightness(card.style.lightness)
         .aspectRatio(Slot.aspectRatio, contentMode: .fit)
         .scaleEffect(isDragging ? 1.05 : 1)
-        .offset(draggingOffset + stackOffset)
-        .gesture(dragGesture, including: isMovable ? .all : .none)
     }
     
     // MARK: Private
     
-    @State private var draggingOffset = CGSize.zero
-    @State private var isDragging = false
-    
-    private let stackOffset: CGSize
-    
-    private var isMovable: Bool {
-        card is Movable && card.stackIndex == 0
-    }
+    @ObservedObject private var metrics: CardMetrics
 }
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(card: AvatarCard(health: 10, attack: 5, defense: 0, wealth: 0)) {
-        } onCardDropped: { _ in
-        }
-    }
-}
-
-// MARK: - Modifiers
-
-private extension View {
-    
-    func lightness(_ lightness: Double) -> some View {
-        modifier(CardLightnessModifier(lightness: lightness))
-    }
-}
-
-private struct CardLightnessModifier: ViewModifier {
-    
-    let lightness: Double
-    
-    func body(content: Content) -> some View {
-        content.overlay(
-            RoundedRectangle(cornerRadius: 8.0, style: .continuous)
-                .fill(Color.black)
-                .opacity(1.0 - lightness))
+        CardView(card: AvatarCard(health: 10, attack: 5, defense: 0, wealth: 0))
     }
 }
 
@@ -183,5 +120,26 @@ private struct MetricView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(4)
+    }
+}
+
+// MARK: - Modifiers
+
+extension View {
+    
+    func lightness(_ lightness: Double) -> some View {
+        modifier(CardLightnessModifier(lightness: lightness))
+    }
+}
+
+private struct CardLightnessModifier: ViewModifier {
+    
+    let lightness: Double
+    
+    func body(content: Content) -> some View {
+        content.overlay(
+            RoundedRectangle(cornerRadius: 8.0, style: .continuous)
+                .fill(Color.black)
+                .opacity(1.0 - lightness))
     }
 }

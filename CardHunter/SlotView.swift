@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
+import Emerald
 
 struct SlotView: View {
     
     @ObservedObject var slot: Slot
     
-    let onCardPicked: ((Card) -> Void)
-    let onCardDropped: ((Card, CGPoint) -> Void)
+    let onCardPicked: (Card) -> Void
+    let onCardDropped: (Card, CGPoint) -> Void
+    let onCardMoved: (Slot, Direction) -> Bool
     
     var body: some View {
         switch slot.type {
@@ -34,6 +36,27 @@ struct SlotView: View {
                 }
             )
         default:
+            let dragGesture = DragGesture(minimumDistance: 0)
+                .onChanged {
+                    self.isDragging = true
+                    self.draggingOffset = $0.translation
+                }
+                .onEnded {
+                    value in
+                    if abs(draggingOffset.width) >= slot.bounds.width / 2
+                        && onCardMoved(slot, draggingOffset.width > 0 ? .right : .left) {
+                        //
+                    } else if abs(draggingOffset.height) >= slot.bounds.height / 2
+                        && onCardMoved(slot, draggingOffset.height > 0 ? .down : .up) {
+                        //
+                    }
+                    
+                    withAnimation(.easeOut(duration: 0.1)) {
+                        self.draggingOffset = .zero
+                        self.isDragging = false
+                    }
+                }
+            
             return AnyView(
                 ZStack {
                     RoundedRectangle(cornerRadius: 8.0, style: .continuous)
@@ -44,25 +67,20 @@ struct SlotView: View {
                     
                     ForEach(slot.cards, id: \.id) {
                         card in
-                        CardView(card: card) {
-                            self.onCardPicked(card)
-                            zIndex = 100
-                        } onCardDropped: {
-                            localOffset in
-                            self.onCardDropped(card, localOffset)
-                            zIndex = 0
-                        }
-                        .zIndex(card.zIndex)
-                        .offset(x: 0, y: -Slot.stackedCardOffset * CGFloat(slot.cards.count - 1))
-                        .transition(card.type == .avatar
-                            ? .identity
-                            : .asymmetric(
-                                insertion: AnyTransition.opacity.combined(with: .scale)
-                                    .animation(.easeInOut(duration: 0.5)),
-                                removal: .identity
-                        ))
+                        CardView(card: card)
+                            .offset(card.stackIndex == 0 ? draggingOffset : .zero)
+                            .lightness(slot.proximityFactor)
+                            .zIndex(card.zIndex)
+                            .transition(card.type == .avatar
+                                ? .identity
+                                : .asymmetric(
+                                    insertion: AnyTransition.opacity.combined(with: .scale)
+                                        .animation(.easeInOut(duration: 0.5)),
+                                    removal: .identity
+                            ))
                     }
                 }
+                .gesture(dragGesture, including: slot.isActionable ? .all : .none)
                 .zIndex(zIndex)
             )
         }
@@ -70,6 +88,8 @@ struct SlotView: View {
     
     // MARK: Private
     
+    @State private var draggingOffset = CGSize.zero
+    @State private var isDragging = false
     @State private var zIndex = Double(0)
 }
 
@@ -79,6 +99,6 @@ struct SlotView_Previews: PreviewProvider {
             
         } onCardDropped: { _, _ in
             
-        }
+        } onCardMoved: { _, _ in  return true}
     }
 }

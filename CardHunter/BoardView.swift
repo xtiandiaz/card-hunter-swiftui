@@ -68,6 +68,9 @@ struct SlotRow: View {
 //                    onCardDropped($0, slot, $1)
                     board.tryMovingCard($0, fromSlot: slot, withPositionOffset: $1)
                     zIndex = 0
+                } onCardMoved: {
+                    slot, direction in
+                    board.tryMovingCard(fromSlot: slot, toward: direction)
                 }
                 .anchorBounds(forSlotId: slot.id)
             }
