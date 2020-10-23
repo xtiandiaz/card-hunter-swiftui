@@ -20,7 +20,7 @@ class Board: ObservableObject {
     let collectibleRows: Int
     
     lazy var fieldSlots = slots(forType: .field).sorted(by: \.index)
-    lazy var weaponsSlot = addSlot(withType: .inventory, index: 0, capacity: 10)
+    lazy var weaponSlot = addSlot(withType: .inventory, index: 0, capacity: 10)
     lazy var collectibleSlots = slots(forType: .inventory).sorted(by: \.index)
     
     @Published var avatarLocation: Location
@@ -51,134 +51,27 @@ class Board: ObservableObject {
         setFogOfWar(atIndex: startSlot.index)
     }
     
-    func tryMovingCard(fromSlot origin: Slot, toward direction: Direction) -> Bool {
+    func tryMovingCard(fromSlot origin: Slot, toward direction: Direction) -> Move? {
         guard
             let start = location(forIndex: origin.index),
-            let destination = self.slot(forLocation: start.oneToward(direction: direction)),
-            let card = origin.topCard
+            let destination = self.slot(forLocation: start.oneToward(direction: direction))
         else {
-            return false
+            return nil
         }
         
-        var didMove = false
-        
-        if destination.isEmpty {
-            if destination.pushCard(card) {
-                origin.popCard()
-                didMove = true
-            }
-        } else if let target = destination.cards.first {
-            if target.type == .weapon,
-               weaponsSlot.pushCard(target)
-            {
-                destination.popCard()
-                
-                if destination.pushCard(card) {
-                    origin.popCard()
-                    didMove = true
-                }
-            } else if
-                target.type == .item,
-                let invSlot = firstFreeInventorySlot,
-                invSlot.pushCard(target)
-            {
-                destination.popCard()
-                
-                if destination.pushCard(card) {
-                    origin.popCard()
-                    didMove = true
-                }
-            } else {
-                target.apply(other: card)
-                
-                if target.isInvalidated, destination.pushCard(card) {
-                    origin.popCard()
-                    didMove = true
-                }
-            }
-        }
-        
-        cleanUp()
-        
-        if didMove, card.type == .avatar {
-            avatarLocation = location(forIndex: destination.index)!
-            
-            withAnimation(.easeIn) {
-                boardOffset = CGSize(
-                    width: CGFloat(center.col - avatarLocation.col) * (startSlot.bounds.width + Slot.interitemSpacing),
-                    height: CGFloat(center.row - avatarLocation.row) * (startSlot.bounds.height + Slot.interitemSpacing))
-            }
-            
-            setFogOfWar(atIndex: destination.index)
-            
-            setTrail(toDestination: destination)
-        }
-        
-        return didMove
+        return tryMovingCard(from: origin, to: destination)
     }
     
-    func tryMovingCard(_ card: Card, fromSlot origin: Slot, withPositionOffset offset: CGPoint) {
+    func tryMovingCard(_ card: Card, fromSlot origin: Slot, withPositionOffset offset: CGPoint) -> Move? {
         guard
             let destination = slot(forPosition: origin.bounds.center + offset),
             destination.isEnabled, !destination.isLocked,
             destination != origin
         else {
-            return
+            return nil
         }
         
-        var didMove = false
-        
-        if destination.isEmpty {
-            if destination.pushCard(card) {
-                origin.popCard()
-                didMove = true
-            }
-        } else if let target = destination.cards.first {
-            if target.type == .weapon,
-               weaponsSlot.pushCard(target)
-            {
-                destination.popCard()
-                
-                if destination.pushCard(card) {
-                    origin.popCard()
-                    didMove = true
-                }
-            } else if
-                target.type == .item,
-                let invSlot = firstFreeInventorySlot,
-                invSlot.pushCard(target)
-            {
-                destination.popCard()
-                
-                if destination.pushCard(card) {
-                    origin.popCard()
-                    didMove = true
-                }
-            } else {
-                target.apply(other: card)
-                
-                if target.isInvalidated, destination.pushCard(card) {
-                    origin.popCard()
-                    didMove = true
-                }
-            }
-        }
-        
-        cleanUp()
-        
-        if didMove, card.type == .avatar {
-            avatarLocation = location(forIndex: destination.index)!
-            
-            withAnimation(.easeIn) {
-                boardOffset = CGSize(
-                    width: CGFloat(center.col - avatarLocation.col) * (startSlot.bounds.width + Slot.interitemSpacing),
-                    height: CGFloat(center.row - avatarLocation.row) * (startSlot.bounds.height + Slot.interitemSpacing))
-            }
-            
-            setFogOfWar(atIndex: destination.index)
-            
-            setTrail(toDestination: destination)
-        }
+        return tryMovingCard(from: origin, to: destination)
     }
     
     // MARK: Private
@@ -187,6 +80,9 @@ class Board: ObservableObject {
     private let avatar = AvatarCard(health: 10, attack: 10, defense: 0, wealth: 0)
     private let center: Location
     private let startLocation: Location
+    
+    private lazy var moveController = MoveController(inventoryController: inventoryController)
+    private lazy var inventoryController = InventoryController(weaponSlot: weaponSlot)
     
     private var slotForId = [UUID: Slot]()
     private var slotForIndex = [SlotType: [Int: Slot]]()
@@ -203,10 +99,32 @@ class Board: ObservableObject {
     
     private func deal() {
         fieldSlots.forEach {
-            if $0.isEmpty, let card = deck.deal(), Double.random(in: 0...1) > 0.5 {
+            if $0.isEmpty, let card = deck.deal()/*, Double.random(in: 0...1) > 0.5*/ {
                 $0.pushCard(card)
             }
         }
+    }
+    
+    private func tryMovingCard(from origin: Slot, to destination: Slot) -> Move? {
+        let move = moveController.resolve(from: origin, to: destination)
+        
+        cleanUp()
+        
+        if move != nil {
+            avatarLocation = location(forIndex: destination.index)!
+            
+            withAnimation(.easeIn) {
+                boardOffset = CGSize(
+                    width: CGFloat(center.col - avatarLocation.col) * (startSlot.bounds.width + Slot.interitemSpacing),
+                    height: CGFloat(center.row - avatarLocation.row) * (startSlot.bounds.height + Slot.interitemSpacing))
+            }
+            
+            setFogOfWar(atIndex: destination.index)
+            
+            setTrail(toDestination: destination)
+        }
+        
+        return move
     }
     
     private func setFogOfWar(atIndex index: Int) {

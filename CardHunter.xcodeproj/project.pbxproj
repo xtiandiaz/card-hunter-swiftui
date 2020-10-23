@@ -17,6 +17,8 @@
 		85BBBAE125058C5F00F0372A /* FoodCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBAE025058C5F00F0372A /* FoodCard.swift */; };
 		85BBBAE325058DFF00F0372A /* GemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBAE225058DFF00F0372A /* GemCard.swift */; };
 		85BBBAE5250593C500F0372A /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBAE4250593C500F0372A /* ColorExtensions.swift */; };
+		85BE1EB42542D06F00A7A739 /* MoveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BE1EB32542D06F00A7A739 /* MoveController.swift */; };
+		85BE1EB72542D2E200A7A739 /* InventoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BE1EB62542D2E200A7A739 /* InventoryController.swift */; };
 		85F795A624E9762D00CC9E9C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F795A524E9762D00CC9E9C /* ContentView.swift */; };
 		85F795A824E9762F00CC9E9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85F795A724E9762F00CC9E9C /* Assets.xcassets */; };
 		85F795AB24E9762F00CC9E9C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85F795AA24E9762F00CC9E9C /* Preview Assets.xcassets */; };
@@ -45,6 +47,8 @@
 		85BBBAE025058C5F00F0372A /* FoodCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCard.swift; sourceTree = "<group>"; };
 		85BBBAE225058DFF00F0372A /* GemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemCard.swift; sourceTree = "<group>"; };
 		85BBBAE4250593C500F0372A /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		85BE1EB32542D06F00A7A739 /* MoveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveController.swift; sourceTree = "<group>"; };
+		85BE1EB62542D2E200A7A739 /* InventoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryController.swift; sourceTree = "<group>"; };
 		85F795A024E9762D00CC9E9C /* CardHunter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardHunter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85F795A524E9762D00CC9E9C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		85F795A724E9762F00CC9E9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -135,6 +139,8 @@
 				85F795BD24FA351800CC9E9C /* BoardView.swift */,
 				85F795B824FA2D2100CC9E9C /* Slot.swift */,
 				85F795BF24FA35A000CC9E9C /* SlotView.swift */,
+				85BE1EB32542D06F00A7A739 /* MoveController.swift */,
+				85BE1EB62542D2E200A7A739 /* InventoryController.swift */,
 			);
 			name = Board;
 			sourceTree = "<group>";
@@ -303,10 +309,12 @@
 				85BBBADD24FBFE5000F0372A /* CardMetrics.swift in Sources */,
 				85BBBAE325058DFF00F0372A /* GemCard.swift in Sources */,
 				85BBBAE125058C5F00F0372A /* FoodCard.swift in Sources */,
+				85BE1EB42542D06F00A7A739 /* MoveController.swift in Sources */,
 				85BBBAD924FBF2AA00F0372A /* Deck.swift in Sources */,
 				85F795C024FA35A000CC9E9C /* SlotView.swift in Sources */,
 				850178902533290C009ED351 /* ItemCard.swift in Sources */,
 				85BBBAD724FBBD8D00F0372A /* AvatarCard.swift in Sources */,
+				85BE1EB72542D2E200A7A739 /* InventoryController.swift in Sources */,
 				85F795C824FA408800CC9E9C /* GeometryExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -154,7 +154,7 @@ extension Slot: Equatable {
 
 extension Slot {
     
-    static var aspectRatio: CGFloat = 1
+    static var aspectRatio: CGFloat = 5 / 6
     static var interitemSpacing: CGFloat = 8
     
     var content: CardContent {

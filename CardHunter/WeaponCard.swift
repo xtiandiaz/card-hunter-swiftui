@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-class WeaponCard: Card {
+class WeaponCard: Card, Collectible {
     
     let id: UUID
     let type: CardType
     let metrics = CardMetrics()
-    let style = CardStyle(backgroundColor: .gray, foregroundColor: .white)
     
     var stackIndex = 0
+    var isCollected = false
     
     init(value: Int) {
         id = UUID()
@@ -27,7 +27,13 @@ class WeaponCard: Card {
         .string(value: "🗡")
     }
     
+    var style: CardStyle {
+        isCollected
+            ? CardStyle(backgroundColor: .white, foregroundColor: .black)
+            : CardStyle(backgroundColor: .grayDark, foregroundColor: .white)
+    }
+    
     var isInvalidated: Bool {
-        false
+        metrics.safeValue(forKey: .attack) <= 0
     }
 }

@@ -94,18 +94,18 @@ private struct MetricView: View {
     
     var valueView: some View {
         Text("\(metric.value)")
-            .font(.system(size: 15, weight: .black))
+            .font(.system(size: 17, weight: .black))
             .foregroundColor(foregroundColor)
-            .frame(minWidth: 12, maxHeight: 15)
+            .frame(minWidth: 12, maxHeight: 17)
     }
     
     var iconView: some View {
         Text(metric.icon)
-            .font(.system(size: 12))
+            .font(.system(size: 13))
     }
     
     var body: some View {
-        VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 0) {
+        VStack(alignment: .center, spacing: 0) {
             if anchor == .bottom {
                 Spacer()
             }

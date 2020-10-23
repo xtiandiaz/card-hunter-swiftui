@@ -12,7 +12,7 @@ class AvatarCard: Card, Destructible, Movable {
     let id: UUID
     let type: CardType
     let metrics = CardMetrics()
-    let style = CardStyle(backgroundColor: .yellow, foregroundColor: .black)
+    let style = CardStyle(backgroundColor: .white, foregroundColor: .black)
     
     var stackIndex = 0
     var locationIndex: Int?

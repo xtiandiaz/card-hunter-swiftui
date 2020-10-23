@@ -89,8 +89,9 @@ extension Consumable {
     }
 }
 
-protocol Collectible {
+protocol Collectible: Card {
     
+    var isCollected: Bool { get set }
 }
 
 extension Card {
