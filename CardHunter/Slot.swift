@@ -161,8 +161,9 @@ extension Slot: Equatable {
 
 extension Slot {
     
-    static var aspectRatio: CGFloat = 5 / 6
-    static var interitemSpacing: CGFloat = 8
+    static let aspectRatio: CGFloat = 5 / 6
+    static let interitemSpacing: CGFloat = 8
+    static let stackedCardOffset: CGFloat = 4
     
     var content: CardContent {
         switch type {
@@ -174,15 +175,10 @@ extension Slot {
                 case .right: return .systemIcon(name: "chevron.right")
                 case .left: return .systemIcon(name: "chevron.left")
                 case .down: return .systemIcon(name: "chevron.down")
-                default: return .none
                 }
             }
         default: return .none
         }
-    }
-    
-    static var stackedCardOffset: CGFloat {
-        8.0
     }
 }
 

@@ -96,7 +96,19 @@ protocol Collectible: Card {
 
 extension Card {
     
+    var isTop: Bool {
+        stackIndex == 0
+    }
+    
     var zIndex: Double {
         Double(-stackIndex)
+    }
+    
+    var stackOffset: CGSize {
+        CGSize(width: 0, height: CGFloat(stackIndex) * Slot.stackedCardOffset)
+    }
+    
+    var stackDimness: Double {
+        Double(stackIndex) * 0.25
     }
 }

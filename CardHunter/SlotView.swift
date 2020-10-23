@@ -11,50 +11,34 @@ import Emerald
 struct SlotView: View {
     
     @ObservedObject var slot: Slot
-    
     var onCardPicked: (() -> ())?
     var onCardDropped: ((CGPoint) -> ())?
     
     var body: some View {
-        switch slot.type {
-        case .spacer:
-            return AnyView(
+        Group {
+            if slot.type == .spacer {
                 Color.clear
                     .aspectRatio(Slot.aspectRatio, contentMode: .fit)
-            )
-        case .trigger(_):
-            return AnyView(
-                ZStack {
-                    RoundedRectangle(cornerRadius: 8.0, style: .continuous)
-                        .strokeBorder(lineWidth: 2.0)
-                        .foregroundColor(Color.white.opacity(0.15))
-                        .aspectRatio(Slot.aspectRatio, contentMode: .fit)
-                    
-                    CardContentView(content: slot.content)?
-                        .foregroundColor(Color.white.opacity(0.15))
-                }
-            )
-        default:
-            let dragGesture = DragGesture(minimumDistance: 0)
-                .onChanged {
-                    isDragging = true
-                    draggingOffset = $0.translation
-                    
-                    onCardPicked?()
-                }
-                .onEnded {
-                    onCardDropped?(CGPoint(
-                        x: $0.translation.width,
-                        y: $0.translation.height
-                    ))
-                    
-                    withAnimation(.easeOut(duration: 0.1)) {
-                        draggingOffset = .zero
-                        isDragging = false
+            } else {
+                let dragGesture = DragGesture(minimumDistance: 0)
+                    .onChanged {
+                        isDragging = true
+                        draggingOffset = $0.translation
+                        
+                        onCardPicked?()
                     }
-                }
-            
-            return AnyView(
+                    .onEnded {
+                        onCardDropped?(CGPoint(
+                            x: $0.translation.width,
+                            y: $0.translation.height
+                        ))
+                        
+                        withAnimation(.easeOut(duration: 0.1)) {
+                            draggingOffset = .zero
+                            isDragging = false
+                        }
+                    }
+                
                 ZStack {
                     RoundedRectangle(cornerRadius: 8.0, style: .continuous)
                         .strokeBorder(lineWidth: 2.0)
@@ -65,9 +49,10 @@ struct SlotView: View {
                     ForEach(slot.cards, id: \.id) {
                         card in
                         CardView(card: card)
-                            .offset(card.stackIndex == 0 ? draggingOffset : .zero)
-                            .lightness(slot.proximityFactor)
-                            .scaleEffect(isDragging && card.stackIndex == 0 ? 1.05 : 1)
+                            .lightness(slot.proximityFactor - card.stackDimness)
+                            .offset((card.isTop ? draggingOffset : .zero) + card.stackOffset)
+                            .zIndex(card.zIndex)
+                            .scaleEffect(isDragging && card.isTop ? 1.05 : 1)
                             .transition(card.type == .avatar
                                 ? .identity
                                 : .asymmetric(
@@ -79,7 +64,7 @@ struct SlotView: View {
                 }
                 .gesture(dragGesture, including: slot.isActionable ? .all : .none)
                 .zIndex(isDragging ? 1000 : 0)
-            )
+            }
         }
     }
     
@@ -91,10 +76,6 @@ struct SlotView: View {
 
 struct SlotView_Previews: PreviewProvider {
     static var previews: some View {
-        SlotView(slot: .trigger(forEvent: .attack(direction: .up))) { 
-            
-        } onCardDropped: { _ in
-            
-        }
+        SlotView(slot: .trigger(forEvent: .attack(direction: .up)))
     }
 }
