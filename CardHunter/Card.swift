@@ -99,27 +99,4 @@ extension Card {
     var zIndex: Double {
         Double(-stackIndex)
     }
-    
-    func apply(other: Card) {
-        switch other {
-        case let avatar as AvatarCard:
-            switch self {
-            case let destructible as Destructible:
-//                destructible.damage(withValue: avatar.attack(target: destructible.health))
-                let destructibleHealth = destructible.health
-//                if destructibleHealth > 0 {
-                    destructible.damage(withValue: avatar.health)
-                    avatar.damage(withValue: destructibleHealth)
-//                }
-            case let consumable as Consumable:
-                avatar.metrics.add(value: consumable.consumableValue, toKey: consumable.consumableKey)
-                consumable.consume()
-            default:
-                break
-            }
-            break
-        default:
-            break
-        }
-    }
 }

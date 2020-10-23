@@ -49,27 +49,21 @@ struct BoardView: View {
     @EnvironmentObject private var board: Board
 }
 
-struct SlotRow: View {
+private struct SlotRow: View {
     
     let slots: [Slot]
-//    let onCardPicked: ((Card) -> Void)
-//    let onCardDropped: ((Card, _ fromSlot: Slot, _ withOffset: CGPoint) -> Void)
     
     var body: some View {
         HStack(spacing: Slot.interitemSpacing) {
             ForEach(slots) {
                 slot in
-                SlotView(slot: slot) { _ in
-//                    onCardPicked($0)
-                    zIndex = 100
+                SlotView(slot: slot) {
+                    zIndex = 1000
                 } onCardDropped: {
-//                    onCardDropped($0, slot, $1)
-                    board.tryMovingCard($0, fromSlot: slot, withPositionOffset: $1)
+                    board.tryMovingCard(from: slot, withPositionOffset: $0)
                     zIndex = 0
-                } onCardMoved: {
-                    slot, direction in
-                    board.tryMovingCard(fromSlot: slot, toward: direction) != nil
                 }
+                .offset(CGSize(width: slot.zIndex, height: 0))
                 .anchorBounds(forSlotId: slot.id)
             }
         }

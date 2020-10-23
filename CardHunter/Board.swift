@@ -62,7 +62,7 @@ class Board: ObservableObject {
         return tryMovingCard(from: origin, to: destination)
     }
     
-    func tryMovingCard(_ card: Card, fromSlot origin: Slot, withPositionOffset offset: CGPoint) -> Move? {
+    func tryMovingCard(from origin: Slot, withPositionOffset offset: CGPoint) -> Move? {
         guard
             let destination = slot(forPosition: origin.bounds.center + offset),
             destination.isEnabled, !destination.isLocked,
@@ -306,13 +306,13 @@ extension Board {
     }
 }
 
-struct BoundsPreference {
+private struct BoundsPreference {
     
     let id: UUID
     let bounds: Anchor<CGRect>
 }
 
-struct SlotBoundsPreferenceKey: PreferenceKey {
+private struct SlotBoundsPreferenceKey: PreferenceKey {
     
     static var defaultValue: [BoundsPreference] = []
     

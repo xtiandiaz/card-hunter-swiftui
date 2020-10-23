@@ -43,6 +43,13 @@ class Slot: ObservableObject, Identifiable {
         }
     }
     
+    var zIndex = Double(0) {
+        didSet {
+            print(zIndex)
+            objectWillChange.send()
+        }
+    }
+    
     var cards = [Card]()
     
     init(index: Int, type: SlotType, capacity: UInt) {

@@ -11,8 +11,6 @@ struct CardView: View {
     
     let card: Card
     
-    @State var isDragging = false
-    
     init(card: Card) {
         self.card = card
         
@@ -44,7 +42,6 @@ struct CardView: View {
             }
         }
         .aspectRatio(Slot.aspectRatio, contentMode: .fit)
-        .scaleEffect(isDragging ? 1.05 : 1)
     }
     
     // MARK: Private
