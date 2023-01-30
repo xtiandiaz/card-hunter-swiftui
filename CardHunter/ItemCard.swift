@@ -12,7 +12,7 @@ enum Item {
     case potion, torch, escape
 }
 
-class ItemCard: Card {
+class ItemCard: GameCard {
     
     let id: UUID
     let type: CardType

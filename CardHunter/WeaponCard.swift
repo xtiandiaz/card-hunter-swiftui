@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class WeaponCard: Card, Collectible {
+class WeaponCard: GameCard, Collectible {
     
     let id: UUID
     let type: CardType

@@ -9,9 +9,9 @@ import SwiftUI
 
 struct CardView: View {
     
-    let card: Card
+    let card: GameCard
     
-    init(card: Card) {
+    init(card: GameCard) {
         self.card = card
         
         metrics = card.metrics

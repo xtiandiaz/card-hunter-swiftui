@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Emerald
 
 enum SlotType: Equatable, Hashable {
     
@@ -25,7 +24,7 @@ class Slot: ObservableObject, Identifiable {
     
     var bounds = CGRect.zero
     
-    var topCard: Card? {
+    var topCard: GameCard? {
         cards.first
     }
     
@@ -50,7 +49,7 @@ class Slot: ObservableObject, Identifiable {
         }
     }
     
-    var cards = [Card]()
+    var cards = [GameCard]()
     
     init(index: Int, type: SlotType, capacity: UInt) {
         self.id = UUID()
@@ -105,7 +104,7 @@ class Slot: ObservableObject, Identifiable {
     }
     
     @discardableResult
-    func pushCard(_ card: Card) -> Bool {
+    func pushCard(_ card: GameCard) -> Bool {
         guard cardMask.isEmpty || cardMask.contains(card.type) else {
             print("\(self) doesn't accept cards of type \(card.type)")
             return false
@@ -175,6 +174,7 @@ extension Slot {
                 case .right: return .systemIcon(name: "chevron.right")
                 case .left: return .systemIcon(name: "chevron.left")
                 case .down: return .systemIcon(name: "chevron.down")
+                default: return .none
                 }
             }
         default: return .none

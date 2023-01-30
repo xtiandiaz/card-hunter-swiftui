@@ -3,15 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6E24F84BF374C4C7E116A75B /* Pods_CardHunter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0046CE724A45D1F18E10D0 /* Pods_CardHunter.framework */; };
 		850178902533290C009ED351 /* ItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501788F2533290C009ED351 /* ItemCard.swift */; };
 		8524AA0C253D858E00F78F7C /* WeaponCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8524AA0B253D858E00F78F7C /* WeaponCard.swift */; };
 		85BBBAD724FBBD8D00F0372A /* AvatarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBAD624FBBD8D00F0372A /* AvatarCard.swift */; };
-		85BBBAD924FBF2AA00F0372A /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBAD824FBF2AA00F0372A /* Deck.swift */; };
+		85BBBAD924FBF2AA00F0372A /* GameDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBAD824FBF2AA00F0372A /* GameDeck.swift */; };
 		85BBBADD24FBFE5000F0372A /* CardMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBADC24FBFE5000F0372A /* CardMetrics.swift */; };
 		85BBBADF250572C700F0372A /* FoeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBADE250572C700F0372A /* FoeCard.swift */; };
 		85BBBAE125058C5F00F0372A /* FoodCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BBBAE025058C5F00F0372A /* FoodCard.swift */; };
@@ -22,26 +21,60 @@
 		85F795A624E9762D00CC9E9C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F795A524E9762D00CC9E9C /* ContentView.swift */; };
 		85F795A824E9762F00CC9E9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85F795A724E9762F00CC9E9C /* Assets.xcassets */; };
 		85F795AB24E9762F00CC9E9C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85F795AA24E9762F00CC9E9C /* Preview Assets.xcassets */; };
-		85F795B724FA2C8A00CC9E9C /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F795B624FA2C8A00CC9E9C /* Board.swift */; };
+		85F795B724FA2C8A00CC9E9C /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F795B624FA2C8A00CC9E9C /* GameBoard.swift */; };
 		85F795B924FA2D2100CC9E9C /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F795B824FA2D2100CC9E9C /* Slot.swift */; };
 		85F795BC24FA31C000CC9E9C /* SequenceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F795BB24FA31C000CC9E9C /* SequenceExtensions.swift */; };
 		85F795BE24FA351800CC9E9C /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F795BD24FA351800CC9E9C /* BoardView.swift */; };
 		85F795C024FA35A000CC9E9C /* SlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F795BF24FA35A000CC9E9C /* SlotView.swift */; };
-		85F795C424FA35ED00CC9E9C /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F795C324FA35ED00CC9E9C /* Card.swift */; };
+		85F795C424FA35ED00CC9E9C /* GameCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F795C324FA35ED00CC9E9C /* GameCard.swift */; };
 		85F795C624FA360100CC9E9C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F795C524FA360100CC9E9C /* CardView.swift */; };
 		85F795C824FA408800CC9E9C /* GeometryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F795C724FA408800CC9E9C /* GeometryExtensions.swift */; };
 		85FCC76624FB9743009C60ED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FCC76424FB9743009C60ED /* SceneDelegate.swift */; };
 		85FCC76724FB9743009C60ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FCC76524FB9743009C60ED /* AppDelegate.swift */; };
 		85FCC76A24FB9826009C60ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85FCC76824FB9826009C60ED /* LaunchScreen.storyboard */; };
+		98F5D9192987EC0900496429 /* SpriteTiledNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8E12987EC0900496429 /* SpriteTiledNode.swift */; };
+		98F5D91A2987EC0900496429 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8E22987EC0900496429 /* Node.swift */; };
+		98F5D91B2987EC0900496429 /* SpriteTiled.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 98F5D8E52987EC0900496429 /* SpriteTiled.fsh */; };
+		98F5D91D2987EC0900496429 /* UnitSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8E82987EC0900496429 /* UnitSpace.swift */; };
+		98F5D91E2987EC0900496429 /* TextUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8EA2987EC0900496429 /* TextUtils.swift */; };
+		98F5D91F2987EC0900496429 /* ConnectableTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8EB2987EC0900496429 /* ConnectableTimer.swift */; };
+		98F5D9202987EC0900496429 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8ED2987EC0900496429 /* Location.swift */; };
+		98F5D9212987EC0900496429 /* Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8EE2987EC0900496429 /* Anchor.swift */; };
+		98F5D9222987EC0900496429 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8EF2987EC0900496429 /* Message.swift */; };
+		98F5D9232987EC0900496429 /* Axis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8F02987EC0900496429 /* Axis.swift */; };
+		98F5D9242987EC0900496429 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8F12987EC0900496429 /* Gradient.swift */; };
+		98F5D9252987EC0900496429 /* DimmingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8F22987EC0900496429 /* DimmingMode.swift */; };
+		98F5D9262987EC0900496429 /* SpaceLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8F32987EC0900496429 /* SpaceLayout.swift */; };
+		98F5D9272987EC0900496429 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8F42987EC0900496429 /* Direction.swift */; };
+		98F5D9282987EC0900496429 /* RangeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8F62987EC0900496429 /* RangeExtensions.swift */; };
+		98F5D9292987EC0900496429 /* CGExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8F72987EC0900496429 /* CGExtensions.swift */; };
+		98F5D92B2987EC0900496429 /* NumberExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8F92987EC0900496429 /* NumberExtensions.swift */; };
+		98F5D92C2987EC0900496429 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8FA2987EC0900496429 /* StringExtensions.swift */; };
+		98F5D92D2987EC0900496429 /* UITouchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8FB2987EC0900496429 /* UITouchExtensions.swift */; };
+		98F5D92E2987EC0900496429 /* SKNodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8FC2987EC0900496429 /* SKNodeExtensions.swift */; };
+		98F5D9302987EC0900496429 /* SKShaderExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8FE2987EC0900496429 /* SKShaderExtensions.swift */; };
+		98F5D9312987EC0900496429 /* SKSceneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D8FF2987EC0900496429 /* SKSceneExtensions.swift */; };
+		98F5D9322987EC0900496429 /* OptionalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D9002987EC0900496429 /* OptionalExtensions.swift */; };
+		98F5D9332987EC0900496429 /* CollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D9012987EC0900496429 /* CollectionExtensions.swift */; };
+		98F5D9372987EC0900496429 /* GesturePublishers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D9082987EC0900496429 /* GesturePublishers.swift */; };
+		98F5D9392987EC0900496429 /* TokenDisposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D90C2987EC0900496429 /* TokenDisposer.swift */; };
+		98F5D93A2987EC0900496429 /* MessageBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D90D2987EC0900496429 /* MessageBroadcaster.swift */; };
+		98F5D93B2987EC0900496429 /* Dimmable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D90F2987EC0900496429 /* Dimmable.swift */; };
+		98F5D93C2987EC0900496429 /* Space.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D9102987EC0900496429 /* Space.swift */; };
+		98F5D93E2987EC0900496429 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D9122987EC0900496429 /* Card.swift */; };
+		98F5D93F2987EC0900496429 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D9132987EC0900496429 /* Deck.swift */; };
+		98F5D9402987EC0900496429 /* Draggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D9142987EC0900496429 /* Draggable.swift */; };
+		98F5D9412987EC0900496429 /* Highlightable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D9152987EC0900496429 /* Highlightable.swift */; };
+		98F5D9422987EC0900496429 /* Fireable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D9162987EC0900496429 /* Fireable.swift */; };
+		98F5D9432987EC0900496429 /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D9172987EC0900496429 /* Selectable.swift */; };
+		98F5D9442987EC0900496429 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5D9182987EC0900496429 /* Token.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0842F0E0576DE9F22A4436EC /* Pods-CardHunter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardHunter.debug.xcconfig"; path = "Target Support Files/Pods-CardHunter/Pods-CardHunter.debug.xcconfig"; sourceTree = "<group>"; };
-		20C25EA4AEB4F60B3BD4D39F /* Pods-CardHunter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardHunter.release.xcconfig"; path = "Target Support Files/Pods-CardHunter/Pods-CardHunter.release.xcconfig"; sourceTree = "<group>"; };
 		8501788F2533290C009ED351 /* ItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCard.swift; sourceTree = "<group>"; };
 		8524AA0B253D858E00F78F7C /* WeaponCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponCard.swift; sourceTree = "<group>"; };
 		85BBBAD624FBBD8D00F0372A /* AvatarCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCard.swift; sourceTree = "<group>"; };
-		85BBBAD824FBF2AA00F0372A /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
+		85BBBAD824FBF2AA00F0372A /* GameDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDeck.swift; sourceTree = "<group>"; };
 		85BBBADC24FBFE5000F0372A /* CardMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMetrics.swift; sourceTree = "<group>"; };
 		85BBBADE250572C700F0372A /* FoeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoeCard.swift; sourceTree = "<group>"; };
 		85BBBAE025058C5F00F0372A /* FoodCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCard.swift; sourceTree = "<group>"; };
@@ -54,18 +87,53 @@
 		85F795A724E9762F00CC9E9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		85F795AA24E9762F00CC9E9C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		85F795AC24E9762F00CC9E9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		85F795B624FA2C8A00CC9E9C /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		85F795B624FA2C8A00CC9E9C /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		85F795B824FA2D2100CC9E9C /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
 		85F795BB24FA31C000CC9E9C /* SequenceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensions.swift; sourceTree = "<group>"; };
 		85F795BD24FA351800CC9E9C /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		85F795BF24FA35A000CC9E9C /* SlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotView.swift; sourceTree = "<group>"; };
-		85F795C324FA35ED00CC9E9C /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		85F795C324FA35ED00CC9E9C /* GameCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCard.swift; sourceTree = "<group>"; };
 		85F795C524FA360100CC9E9C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		85F795C724FA408800CC9E9C /* GeometryExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryExtensions.swift; sourceTree = "<group>"; };
 		85FCC76424FB9743009C60ED /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		85FCC76524FB9743009C60ED /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85FCC76924FB9826009C60ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		CA0046CE724A45D1F18E10D0 /* Pods_CardHunter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardHunter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		98F5D8E12987EC0900496429 /* SpriteTiledNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteTiledNode.swift; sourceTree = "<group>"; };
+		98F5D8E22987EC0900496429 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		98F5D8E52987EC0900496429 /* SpriteTiled.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SpriteTiled.fsh; sourceTree = "<group>"; };
+		98F5D8E82987EC0900496429 /* UnitSpace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitSpace.swift; sourceTree = "<group>"; };
+		98F5D8EA2987EC0900496429 /* TextUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextUtils.swift; sourceTree = "<group>"; };
+		98F5D8EB2987EC0900496429 /* ConnectableTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectableTimer.swift; sourceTree = "<group>"; };
+		98F5D8ED2987EC0900496429 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		98F5D8EE2987EC0900496429 /* Anchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anchor.swift; sourceTree = "<group>"; };
+		98F5D8EF2987EC0900496429 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		98F5D8F02987EC0900496429 /* Axis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Axis.swift; sourceTree = "<group>"; };
+		98F5D8F12987EC0900496429 /* Gradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
+		98F5D8F22987EC0900496429 /* DimmingMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingMode.swift; sourceTree = "<group>"; };
+		98F5D8F32987EC0900496429 /* SpaceLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceLayout.swift; sourceTree = "<group>"; };
+		98F5D8F42987EC0900496429 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		98F5D8F62987EC0900496429 /* RangeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeExtensions.swift; sourceTree = "<group>"; };
+		98F5D8F72987EC0900496429 /* CGExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGExtensions.swift; sourceTree = "<group>"; };
+		98F5D8F92987EC0900496429 /* NumberExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberExtensions.swift; sourceTree = "<group>"; };
+		98F5D8FA2987EC0900496429 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		98F5D8FB2987EC0900496429 /* UITouchExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITouchExtensions.swift; sourceTree = "<group>"; };
+		98F5D8FC2987EC0900496429 /* SKNodeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKNodeExtensions.swift; sourceTree = "<group>"; };
+		98F5D8FE2987EC0900496429 /* SKShaderExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKShaderExtensions.swift; sourceTree = "<group>"; };
+		98F5D8FF2987EC0900496429 /* SKSceneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKSceneExtensions.swift; sourceTree = "<group>"; };
+		98F5D9002987EC0900496429 /* OptionalExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalExtensions.swift; sourceTree = "<group>"; };
+		98F5D9012987EC0900496429 /* CollectionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtensions.swift; sourceTree = "<group>"; };
+		98F5D9082987EC0900496429 /* GesturePublishers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePublishers.swift; sourceTree = "<group>"; };
+		98F5D90C2987EC0900496429 /* TokenDisposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDisposer.swift; sourceTree = "<group>"; };
+		98F5D90D2987EC0900496429 /* MessageBroadcaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageBroadcaster.swift; sourceTree = "<group>"; };
+		98F5D90F2987EC0900496429 /* Dimmable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dimmable.swift; sourceTree = "<group>"; };
+		98F5D9102987EC0900496429 /* Space.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Space.swift; sourceTree = "<group>"; };
+		98F5D9122987EC0900496429 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		98F5D9132987EC0900496429 /* Deck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
+		98F5D9142987EC0900496429 /* Draggable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Draggable.swift; sourceTree = "<group>"; };
+		98F5D9152987EC0900496429 /* Highlightable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Highlightable.swift; sourceTree = "<group>"; };
+		98F5D9162987EC0900496429 /* Fireable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fireable.swift; sourceTree = "<group>"; };
+		98F5D9172987EC0900496429 /* Selectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
+		98F5D9182987EC0900496429 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,28 +141,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E24F84BF374C4C7E116A75B /* Pods_CardHunter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		50737E13C398C725E623732F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				0842F0E0576DE9F22A4436EC /* Pods-CardHunter.debug.xcconfig */,
-				20C25EA4AEB4F60B3BD4D39F /* Pods-CardHunter.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		85F7959724E9762D00CC9E9C = {
 			isa = PBXGroup;
 			children = (
 				85F795A224E9762D00CC9E9C /* CardHunter */,
 				85F795A124E9762D00CC9E9C /* Products */,
-				50737E13C398C725E623732F /* Pods */,
 				FB61866B1D248090D320D6D6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -110,6 +167,7 @@
 		85F795A224E9762D00CC9E9C /* CardHunter */ = {
 			isa = PBXGroup;
 			children = (
+				98F5D8DF2987EC0900496429 /* Emerald */,
 				85FCC76824FB9826009C60ED /* LaunchScreen.storyboard */,
 				85FCC76524FB9743009C60ED /* AppDelegate.swift */,
 				85FCC76424FB9743009C60ED /* SceneDelegate.swift */,
@@ -135,7 +193,7 @@
 		85F795B524FA2C6200CC9E9C /* Board */ = {
 			isa = PBXGroup;
 			children = (
-				85F795B624FA2C8A00CC9E9C /* Board.swift */,
+				85F795B624FA2C8A00CC9E9C /* GameBoard.swift */,
 				85F795BD24FA351800CC9E9C /* BoardView.swift */,
 				85F795B824FA2D2100CC9E9C /* Slot.swift */,
 				85F795BF24FA35A000CC9E9C /* SlotView.swift */,
@@ -162,20 +220,166 @@
 				85BBBADE250572C700F0372A /* FoeCard.swift */,
 				85BBBAE025058C5F00F0372A /* FoodCard.swift */,
 				85BBBAE225058DFF00F0372A /* GemCard.swift */,
-				85F795C324FA35ED00CC9E9C /* Card.swift */,
+				85F795C324FA35ED00CC9E9C /* GameCard.swift */,
 				85F795C524FA360100CC9E9C /* CardView.swift */,
 				85BBBADC24FBFE5000F0372A /* CardMetrics.swift */,
-				85BBBAD824FBF2AA00F0372A /* Deck.swift */,
+				85BBBAD824FBF2AA00F0372A /* GameDeck.swift */,
 				8501788F2533290C009ED351 /* ItemCard.swift */,
 				8524AA0B253D858E00F78F7C /* WeaponCard.swift */,
 			);
 			name = Cards;
 			sourceTree = "<group>";
 		};
+		98F5D8DF2987EC0900496429 /* Emerald */ = {
+			isa = PBXGroup;
+			children = (
+				98F5D8E02987EC0900496429 /* Nodes */,
+				98F5D8E32987EC0900496429 /* Resources */,
+				98F5D8E62987EC0900496429 /* Spaces */,
+				98F5D8E92987EC0900496429 /* Utils */,
+				98F5D8EC2987EC0900496429 /* Models */,
+				98F5D8F52987EC0900496429 /* Extensions */,
+				98F5D9022987EC0900496429 /* Behaviors */,
+				98F5D9042987EC0900496429 /* Boards */,
+				98F5D9072987EC0900496429 /* Publishers */,
+				98F5D9092987EC0900496429 /* Scene */,
+				98F5D90B2987EC0900496429 /* Controllers */,
+				98F5D90E2987EC0900496429 /* Protocols */,
+			);
+			path = Emerald;
+			sourceTree = "<group>";
+		};
+		98F5D8E02987EC0900496429 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				98F5D8E12987EC0900496429 /* SpriteTiledNode.swift */,
+				98F5D8E22987EC0900496429 /* Node.swift */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
+		98F5D8E32987EC0900496429 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				98F5D8E42987EC0900496429 /* Shaders */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		98F5D8E42987EC0900496429 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				98F5D8E52987EC0900496429 /* SpriteTiled.fsh */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
+		98F5D8E62987EC0900496429 /* Spaces */ = {
+			isa = PBXGroup;
+			children = (
+				98F5D8E82987EC0900496429 /* UnitSpace.swift */,
+			);
+			path = Spaces;
+			sourceTree = "<group>";
+		};
+		98F5D8E92987EC0900496429 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				98F5D8EA2987EC0900496429 /* TextUtils.swift */,
+				98F5D8EB2987EC0900496429 /* ConnectableTimer.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		98F5D8EC2987EC0900496429 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				98F5D8ED2987EC0900496429 /* Location.swift */,
+				98F5D8EE2987EC0900496429 /* Anchor.swift */,
+				98F5D8EF2987EC0900496429 /* Message.swift */,
+				98F5D8F02987EC0900496429 /* Axis.swift */,
+				98F5D8F12987EC0900496429 /* Gradient.swift */,
+				98F5D8F22987EC0900496429 /* DimmingMode.swift */,
+				98F5D8F32987EC0900496429 /* SpaceLayout.swift */,
+				98F5D8F42987EC0900496429 /* Direction.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		98F5D8F52987EC0900496429 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				98F5D8F62987EC0900496429 /* RangeExtensions.swift */,
+				98F5D8F72987EC0900496429 /* CGExtensions.swift */,
+				98F5D8F92987EC0900496429 /* NumberExtensions.swift */,
+				98F5D8FA2987EC0900496429 /* StringExtensions.swift */,
+				98F5D8FB2987EC0900496429 /* UITouchExtensions.swift */,
+				98F5D8FC2987EC0900496429 /* SKNodeExtensions.swift */,
+				98F5D8FE2987EC0900496429 /* SKShaderExtensions.swift */,
+				98F5D8FF2987EC0900496429 /* SKSceneExtensions.swift */,
+				98F5D9002987EC0900496429 /* OptionalExtensions.swift */,
+				98F5D9012987EC0900496429 /* CollectionExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		98F5D9022987EC0900496429 /* Behaviors */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Behaviors;
+			sourceTree = "<group>";
+		};
+		98F5D9042987EC0900496429 /* Boards */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Boards;
+			sourceTree = "<group>";
+		};
+		98F5D9072987EC0900496429 /* Publishers */ = {
+			isa = PBXGroup;
+			children = (
+				98F5D9082987EC0900496429 /* GesturePublishers.swift */,
+			);
+			path = Publishers;
+			sourceTree = "<group>";
+		};
+		98F5D9092987EC0900496429 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		98F5D90B2987EC0900496429 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				98F5D90C2987EC0900496429 /* TokenDisposer.swift */,
+				98F5D90D2987EC0900496429 /* MessageBroadcaster.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		98F5D90E2987EC0900496429 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				98F5D90F2987EC0900496429 /* Dimmable.swift */,
+				98F5D9102987EC0900496429 /* Space.swift */,
+				98F5D9122987EC0900496429 /* Card.swift */,
+				98F5D9132987EC0900496429 /* Deck.swift */,
+				98F5D9142987EC0900496429 /* Draggable.swift */,
+				98F5D9152987EC0900496429 /* Highlightable.swift */,
+				98F5D9162987EC0900496429 /* Fireable.swift */,
+				98F5D9172987EC0900496429 /* Selectable.swift */,
+				98F5D9182987EC0900496429 /* Token.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		FB61866B1D248090D320D6D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CA0046CE724A45D1F18E10D0 /* Pods_CardHunter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -187,17 +391,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85F795AF24E9762F00CC9E9C /* Build configuration list for PBXNativeTarget "CardHunter" */;
 			buildPhases = (
-				C9B04C96D46DBEFC43749BAB /* [CP] Check Pods Manifest.lock */,
 				85F7959C24E9762D00CC9E9C /* Sources */,
 				85F7959D24E9762D00CC9E9C /* Frameworks */,
 				85F7959E24E9762D00CC9E9C /* Resources */,
-				925F98CC3CC75CA84ECC3C5F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = CardHunter;
+			packageProductDependencies = (
+			);
 			productName = CardHunter;
 			productReference = 85F795A024E9762D00CC9E9C /* CardHunter.app */;
 			productType = "com.apple.product-type.application";
@@ -242,80 +446,74 @@
 				85FCC76A24FB9826009C60ED /* LaunchScreen.storyboard in Resources */,
 				85F795AB24E9762F00CC9E9C /* Preview Assets.xcassets in Resources */,
 				85F795A824E9762F00CC9E9C /* Assets.xcassets in Resources */,
+				98F5D91B2987EC0900496429 /* SpriteTiled.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		925F98CC3CC75CA84ECC3C5F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CardHunter/Pods-CardHunter-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CardHunter/Pods-CardHunter-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CardHunter/Pods-CardHunter-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C9B04C96D46DBEFC43749BAB /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CardHunter-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		85F7959C24E9762D00CC9E9C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98F5D9302987EC0900496429 /* SKShaderExtensions.swift in Sources */,
+				98F5D9332987EC0900496429 /* CollectionExtensions.swift in Sources */,
+				98F5D91F2987EC0900496429 /* ConnectableTimer.swift in Sources */,
 				85FCC76724FB9743009C60ED /* AppDelegate.swift in Sources */,
 				85F795BE24FA351800CC9E9C /* BoardView.swift in Sources */,
-				85F795C424FA35ED00CC9E9C /* Card.swift in Sources */,
+				85F795C424FA35ED00CC9E9C /* GameCard.swift in Sources */,
+				98F5D93A2987EC0900496429 /* MessageBroadcaster.swift in Sources */,
+				98F5D9422987EC0900496429 /* Fireable.swift in Sources */,
+				98F5D91A2987EC0900496429 /* Node.swift in Sources */,
 				85BBBADF250572C700F0372A /* FoeCard.swift in Sources */,
+				98F5D9442987EC0900496429 /* Token.swift in Sources */,
+				98F5D9202987EC0900496429 /* Location.swift in Sources */,
+				98F5D93F2987EC0900496429 /* Deck.swift in Sources */,
+				98F5D92C2987EC0900496429 /* StringExtensions.swift in Sources */,
+				98F5D9192987EC0900496429 /* SpriteTiledNode.swift in Sources */,
+				98F5D9252987EC0900496429 /* DimmingMode.swift in Sources */,
+				98F5D9242987EC0900496429 /* Gradient.swift in Sources */,
+				98F5D9262987EC0900496429 /* SpaceLayout.swift in Sources */,
 				85F795A624E9762D00CC9E9C /* ContentView.swift in Sources */,
+				98F5D9312987EC0900496429 /* SKSceneExtensions.swift in Sources */,
 				85BBBAE5250593C500F0372A /* ColorExtensions.swift in Sources */,
 				85F795C624FA360100CC9E9C /* CardView.swift in Sources */,
+				98F5D9282987EC0900496429 /* RangeExtensions.swift in Sources */,
 				8524AA0C253D858E00F78F7C /* WeaponCard.swift in Sources */,
-				85F795B724FA2C8A00CC9E9C /* Board.swift in Sources */,
+				98F5D9372987EC0900496429 /* GesturePublishers.swift in Sources */,
+				85F795B724FA2C8A00CC9E9C /* GameBoard.swift in Sources */,
+				98F5D92D2987EC0900496429 /* UITouchExtensions.swift in Sources */,
+				98F5D91E2987EC0900496429 /* TextUtils.swift in Sources */,
+				98F5D9432987EC0900496429 /* Selectable.swift in Sources */,
 				85F795B924FA2D2100CC9E9C /* Slot.swift in Sources */,
 				85FCC76624FB9743009C60ED /* SceneDelegate.swift in Sources */,
+				98F5D9212987EC0900496429 /* Anchor.swift in Sources */,
+				98F5D92E2987EC0900496429 /* SKNodeExtensions.swift in Sources */,
+				98F5D9412987EC0900496429 /* Highlightable.swift in Sources */,
 				85F795BC24FA31C000CC9E9C /* SequenceExtensions.swift in Sources */,
+				98F5D93C2987EC0900496429 /* Space.swift in Sources */,
+				98F5D93E2987EC0900496429 /* Card.swift in Sources */,
 				85BBBADD24FBFE5000F0372A /* CardMetrics.swift in Sources */,
 				85BBBAE325058DFF00F0372A /* GemCard.swift in Sources */,
+				98F5D9222987EC0900496429 /* Message.swift in Sources */,
+				98F5D91D2987EC0900496429 /* UnitSpace.swift in Sources */,
 				85BBBAE125058C5F00F0372A /* FoodCard.swift in Sources */,
 				85BE1EB42542D06F00A7A739 /* MoveController.swift in Sources */,
-				85BBBAD924FBF2AA00F0372A /* Deck.swift in Sources */,
+				85BBBAD924FBF2AA00F0372A /* GameDeck.swift in Sources */,
+				98F5D9322987EC0900496429 /* OptionalExtensions.swift in Sources */,
+				98F5D9232987EC0900496429 /* Axis.swift in Sources */,
 				85F795C024FA35A000CC9E9C /* SlotView.swift in Sources */,
 				850178902533290C009ED351 /* ItemCard.swift in Sources */,
+				98F5D92B2987EC0900496429 /* NumberExtensions.swift in Sources */,
 				85BBBAD724FBBD8D00F0372A /* AvatarCard.swift in Sources */,
 				85BE1EB72542D2E200A7A739 /* InventoryController.swift in Sources */,
+				98F5D9292987EC0900496429 /* CGExtensions.swift in Sources */,
+				98F5D93B2987EC0900496429 /* Dimmable.swift in Sources */,
 				85F795C824FA408800CC9E9C /* GeometryExtensions.swift in Sources */,
+				98F5D9402987EC0900496429 /* Draggable.swift in Sources */,
+				98F5D9392987EC0900496429 /* TokenDisposer.swift in Sources */,
+				98F5D9272987EC0900496429 /* Direction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,7 +651,6 @@
 		};
 		85F795B024E9762F00CC9E9C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0842F0E0576DE9F22A4436EC /* Pods-CardHunter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -462,7 +659,7 @@
 				DEVELOPMENT_TEAM = 5RLDR367YX;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = CardHunter/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -470,13 +667,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.beril.CardHunter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		85F795B124E9762F00CC9E9C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20C25EA4AEB4F60B3BD4D39F /* Pods-CardHunter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -485,7 +681,7 @@
 				DEVELOPMENT_TEAM = 5RLDR367YX;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = CardHunter/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -493,7 +689,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.beril.CardHunter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

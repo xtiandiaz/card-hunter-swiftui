@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Emerald
 
 struct BoardView: View {
     
@@ -46,7 +45,7 @@ struct BoardView: View {
     
     // MARK: Private
     
-    @EnvironmentObject private var board: Board
+    @EnvironmentObject private var board: GameBoard
 }
 
 private struct SlotRow: View {
@@ -76,13 +75,13 @@ private struct SlotRow: View {
     
     // MARK: Private
     
-    @EnvironmentObject private var board: Board
+    @EnvironmentObject private var board: GameBoard
     @State private var zIndex = Double(0)
 }
 
 struct BoardView_Previews: PreviewProvider {
     static var previews: some View {
         BoardView()
-            .environmentObject(Board(rows: 5, cols: 5, inventoryRows: 1))
+            .environmentObject(GameBoard(rows: 5, cols: 5, inventoryRows: 1))
     }
 }

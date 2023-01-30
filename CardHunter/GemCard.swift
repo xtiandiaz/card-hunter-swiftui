@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class GemCard: Card {
+class GemCard: GameCard {
     
     let id: UUID
     let type: CardType

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class FoodCard: Card {
+class FoodCard: GameCard {
     
     let id: UUID
     let type: CardType

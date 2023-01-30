@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class AvatarCard: Card, Destructible, Movable {
+class AvatarCard: GameCard, Destructible, Movable {
     
     let id: UUID
     let type: CardType
